@@ -1,8 +1,12 @@
+// postgresql://postgres:admin@localhost:5432/file_uploader?schema=public
+
 const session = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
 const express = require("express");
 const app = express();
+
+app.set("view engine", "ejs");
 
 app.use(
   session({
@@ -17,3 +21,8 @@ app.use(
     }),
   }),
 );
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
