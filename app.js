@@ -7,6 +7,7 @@ const app = express();
 const path = require("node:path");
 const passport = require("passport");
 const initPassport = require("./config/passport").initPass;
+const indexRouter = require("./routes/indexRouter");
 
 app.set("view engine", "ejs");
 
@@ -32,6 +33,10 @@ app.use(express.static(path.join(__dirname)));
 //   res.locals.user = req.user;
 //   next();
 // });
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/", indexRouter);
 
 process.on("SIGINT", async () => {
   prisma.$disconnect();
