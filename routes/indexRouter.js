@@ -5,20 +5,19 @@ const validator = require("../controllers/validator");
 
 indexRouter.get("/", indexController.indexGet);
 
+indexRouter.get("/signup", indexController.userSignupGet);
 indexRouter.post(
   "/signup",
   validator.signupValidator,
   indexController.userSignupPost,
 );
 
+indexRouter.get("/login", indexController.userLoginGet);
 indexRouter.post(
   "/login",
   validator.loginValidator,
   indexController.userLoginPost,
 );
-
-indexRouter.get("/login", indexController.userLoginGet);
-indexRouter.get("/signup", indexController.userSignupGet);
 
 indexRouter.get("/logout", indexController.userLogoutGet);
 

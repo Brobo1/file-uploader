@@ -11,8 +11,9 @@
 <body>
     <%- include("partials/header.ejs") %>
 <div id="container">
+    <h1>File Uploader</h1>
     <%if (user) {%>
-        <p>Welcome <%= user.username%></p>
+        <p id="user-welcome">Welcome <%= user.username%></p>
     <%}%>
 
 </div>
