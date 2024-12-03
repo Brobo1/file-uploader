@@ -14,7 +14,6 @@ exports.initPass = (passport) => {
           console.log("Incorrect username");
           return done(null, false, { message: "Incorrect username" });
         }
-
         const match = await bcrypt.compare(password, user.password);
 
         if (!match) {

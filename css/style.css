@@ -1,0 +1,32 @@
+body {
+  background-color: #4c4c4c;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  margin: auto;
+}
+
+form {
+  width: fit-content;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+header a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+header a:hover {
+  text-decoration: solid white underline;
+}

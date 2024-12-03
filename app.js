@@ -9,6 +9,8 @@ const passport = require("passport");
 const initPassport = require("./config/passport").initPass;
 const indexRouter = require("./routes/indexRouter");
 
+initPassport(passport);
+
 app.set("view engine", "ejs");
 
 app.use(
@@ -26,13 +28,13 @@ app.use(
 );
 
 app.use(passport.initialize());
-app.use(session());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname)));
 
-// app.use((req, res, next) => {
-//   res.locals.user = req.user;
-//   next();
-// });
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use(express.urlencoded({ extended: true }));
 

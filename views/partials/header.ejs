@@ -1,0 +1,9 @@
+
+<header>
+    <div><a href="/">Home</a></div>
+    <% if (!user) {%>
+        <div><a href="/login">Login</a></div>
+    <%} else {%>
+        <div><a href="/logout">Logout</a></div>
+    <%}%>
+</header>
