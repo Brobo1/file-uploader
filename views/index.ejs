@@ -14,52 +14,7 @@
     <%if (user) {%>
         <p>Welcome <%= user.username%></p>
     <%}%>
-    <form
-            action="/login"
-            method="post"
-    >
-        <label for="username"></label>
-        <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-        >
-        <label for="password"></label>
-        <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-        >
-        <button type="submit">Login</button>
-    </form>
-    <form
-            action="/signup"
-            method="post"
-    >
-        <label for="username"></label>
-        <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-        >
-        <label for="password"></label>
-        <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-        >        <label for="confirmPassword"></label>
-        <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                placeholder="confirmPassword"
-        >
-        <button type="submit">Signup</button>
-    </form>
+
 </div>
 
 </body>

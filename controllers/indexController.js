@@ -31,5 +31,14 @@ exports.indexSignupPost = async (req, res) => {
 };
 
 exports.indexLoginGet = async (req, res) => {
-  res.send("Logged in user is " + req.user);
+  res.render("login");
+};
+
+exports.userLogoutGet = async (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      res.status(400).send("Logout failed");
+    }
+    res.redirect("/");
+  });
 };

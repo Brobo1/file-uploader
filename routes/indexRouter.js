@@ -6,6 +6,12 @@ const validator = require("../controllers/validator");
 indexRouter.get("/", indexController.indexGet);
 
 indexRouter.post(
+  "/signup",
+  validator.signupValidator,
+  indexController.indexSignupPost,
+);
+
+indexRouter.post(
   "/login",
   validator.loginValidator,
   indexController.indexLoginPost,
@@ -13,10 +19,6 @@ indexRouter.post(
 
 indexRouter.get("/login", indexController.indexLoginGet);
 
-indexRouter.post(
-  "/signup",
-  validator.signupValidator,
-  indexController.indexSignupPost,
-);
+indexRouter.get("/logout", indexController.userLogoutGet);
 
 module.exports = indexRouter;
