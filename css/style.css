@@ -40,7 +40,8 @@ header a:hover {
 }
 
 #signup-form,
-#login-form {
+#login-form,
+#upload-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
