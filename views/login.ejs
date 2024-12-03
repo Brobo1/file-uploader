@@ -14,21 +14,26 @@
     <form
             action="/login"
             method="post"
+            id="login-form"
     >
-        <label for="username"></label>
-        <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-        >
-        <label for="password"></label>
-        <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-        >
+        <div>
+            <label for="username"></label>
+            <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Username"
+            >
+        </div>
+        <div>
+            <label for="password"></label>
+            <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+            >
+        </div>
         <button type="submit">Login</button>
     </form>
 </div>

@@ -6,7 +6,11 @@ exports.indexGet = async (req, res) => {
   res.render("index");
 };
 
-exports.indexLoginPost = async (req, res) => {
+exports.userLoginGet = async (req, res) => {
+  res.render("login");
+};
+
+exports.userLoginPost = async (req, res) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res
@@ -20,7 +24,11 @@ exports.indexLoginPost = async (req, res) => {
   })(req, res);
 };
 
-exports.indexSignupPost = async (req, res) => {
+exports.userSignupGet = async (req, res) => {
+  res.render("signup");
+};
+
+exports.userSignupPost = async (req, res) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.status(400).render("index", { error: error.array() });
@@ -28,10 +36,6 @@ exports.indexSignupPost = async (req, res) => {
   const { username, password } = req.body;
   await db.userSignup(username, password);
   res.redirect("/");
-};
-
-exports.indexLoginGet = async (req, res) => {
-  res.render("login");
 };
 
 exports.userLogoutGet = async (req, res) => {

@@ -8,16 +8,17 @@ indexRouter.get("/", indexController.indexGet);
 indexRouter.post(
   "/signup",
   validator.signupValidator,
-  indexController.indexSignupPost,
+  indexController.userSignupPost,
 );
 
 indexRouter.post(
   "/login",
   validator.loginValidator,
-  indexController.indexLoginPost,
+  indexController.userLoginPost,
 );
 
-indexRouter.get("/login", indexController.indexLoginGet);
+indexRouter.get("/login", indexController.userLoginGet);
+indexRouter.get("/signup", indexController.userSignupGet);
 
 indexRouter.get("/logout", indexController.userLogoutGet);
 
