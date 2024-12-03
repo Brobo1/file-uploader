@@ -1,5 +1,3 @@
-// postgresql://postgres:admin@localhost:5432/file_uploader?schema=public
-
 const session = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
