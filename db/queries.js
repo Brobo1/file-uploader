@@ -1,5 +1,6 @@
 const { prisma } = require("./prismaClient");
 const bcrypt = require("bcryptjs");
+const { userLogoutGet } = require("../controllers/indexController");
 
 exports.userSignup = async (username, password) => {
   bcrypt.hash(password, 10, async (err, hashedPassword) => {
@@ -12,11 +13,19 @@ exports.userSignup = async (username, password) => {
   });
 };
 
-exports.folderCreate = async (userId, parentId = null) => {
-  let path = "";
+exports.folderCreate = async (name, userId, parentId = null) => {
+  let path = "/";
+  if (parentId) {
+    const parent = await prisma.folder.findFirst({
+      where: { id: parentId },
+    });
+    path += `${parent.name}/${name}`;
+  } else {
+    path += name;
+  }
   await prisma.folder.create({
     data: {
-      name: "New Folder",
+      name: name,
       path: path,
       userId: userId,
       parentId: parentId,
@@ -26,7 +35,13 @@ exports.folderCreate = async (userId, parentId = null) => {
 
 exports.folderGet = async (userId) => {
   return prisma.folder.findMany({
-    select: { name: true },
+    select: { name: true, path: true },
     where: { userId: userId },
+  });
+};
+
+exports.folderGetSpecific = async (userId, parentId) => {
+  return prisma.folder.findMany({
+    where: { userId: userId, parentId: parentId },
   });
 };

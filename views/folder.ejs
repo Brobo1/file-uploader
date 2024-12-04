@@ -9,20 +9,28 @@
     >
 </head>
 <body>
-    <%- include("partials/header.ejs") %>
+<%- include("partials/header.ejs") %>
 <div id="container">
     <h1>Folders</h1>
-    <%if (user) {%>
-        <form action="" method="post">
+    <% if (user) { %>
+        <form
+                action=""
+                method="post"
+        >
             <button type="submit">Add folder</button>
         </form>
 
         <div>
             <% folders.forEach((folder) => { %>
-                <div><%= folder.name%></div>
-            <% })%>
+                <div>
+                    <a
+                            class="folder-link"
+                            href="folder<%= folder.path %>"
+                    ><%= folder.name %></a>
+                </div>
+            <% }) %>
         </div>
-    <%}%>
+    <% } %>
 
 </div>
 
