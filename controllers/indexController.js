@@ -46,3 +46,7 @@ exports.userLogoutGet = async (req, res) => {
     res.redirect("/");
   });
 };
+
+exports.uploadPost = async (req, res) => {
+  console.log(req.file, req.body);
+};
