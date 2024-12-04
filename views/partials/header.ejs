@@ -1,5 +1,9 @@
 <header>
-    <div><a href="/">Home</a></div>
+    <div id="login-header-container">
+        <a href="/">Home</a>
+        <%if (user)%>
+        <a href="/folder">Folders</a>
+    </div>
     <% if (!user) { %>
         <div id="login-header-container">
             <a href="/login">Login</a>
