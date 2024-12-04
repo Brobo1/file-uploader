@@ -17,6 +17,11 @@
             <button type="submit">Add folder</button>
         </form>
 
+        <div>
+            <% folders.forEach((folder) => { %>
+                <div><%= folder.name%></div>
+            <% })%>
+        </div>
     <%}%>
 
 </div>

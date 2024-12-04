@@ -3,7 +3,12 @@ const passport = require("passport");
 const db = require("../db/queries");
 
 exports.folderGet = async (req, res) => {
-  res.render("folder");
+  const folders = await db.folderGet(req.user.id);
+  console.log(folders);
+  res.render("folder", { folders });
 };
 
-exports.addFolderPost = async (req, res) => {};
+exports.addFolderPost = async (req, res) => {
+  // await db.folderCreate("/", req.user.id);
+  res.redirect("/folder");
+};

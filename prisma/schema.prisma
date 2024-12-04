@@ -58,6 +58,4 @@ model Folder {
   path String
 
   files File[]
-
-  @@unique([name, parentId])
 }
