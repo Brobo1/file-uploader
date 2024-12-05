@@ -14,14 +14,14 @@ exports.userSignup = async (username, password) => {
 };
 
 exports.folderCreate = async (name, userId, parentId = null) => {
-  let path = "/";
+  let path;
   if (parentId) {
     const parent = await prisma.folder.findFirst({
       where: { id: parentId },
     });
-    path += `${parent.name}/${name}`;
+    path = `${parent.path}/${name}`;
   } else {
-    path += name;
+    path = `/${name}`;
   }
   await prisma.folder.create({
     data: {
@@ -40,7 +40,11 @@ exports.folderGet = async (userId) => {
   });
 };
 
-exports.folderGetSpecific = async (userId, path) => {
+exports.folderGetByPath = async (userId, path) => {
+  return prisma.folder.findFirst({ where: { userId: userId, path: path } });
+};
+
+exports.folderGetChildrenByPath = async (userId, path) => {
   if (path === "/") {
     //Only get root folders
     return prisma.folder.findMany({

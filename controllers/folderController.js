@@ -3,12 +3,17 @@ const passport = require("passport");
 const db = require("../db/queries");
 
 exports.folderGet = async (req, res) => {
-  console.log(req.path);
-  const folders = await db.folderGetSpecific(req.user.id, req.path);
+  const folders = await db.folderGetChildrenByPath(req.user.id, req.path);
+  console.log(decodeURI(req.path));
   res.render("folder", { folders: folders });
 };
 
 exports.addFolderPost = async (req, res) => {
-  // await db.folderCreate("Image2", req.user.id, 2);
-  res.redirect("/folder");
+  let path = "";
+  if (req.path !== "/") path = `/${req.params.path}`;
+
+  const folder = await db.folderGetByPath(req.user.id, path);
+
+  await db.folderCreate("New folder", req.user.id, folder.id);
+  res.redirect("/folder" + path);
 };

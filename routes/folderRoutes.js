@@ -4,8 +4,7 @@ const folderRouter = Router();
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
-folderRouter.get("/", folderController.folderGet);
-folderRouter.post("/", folderController.addFolderPost);
+folderRouter.post("/:path(*)", folderController.addFolderPost);
 
 folderRouter.get("/:path(*)", folderController.folderGet);
 
