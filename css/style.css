@@ -51,3 +51,8 @@ header a:hover {
 #user-welcome {
   font-size: 20px;
 }
+
+[id*="rename-form"] {
+  display: none;
+  position: fixed;
+}

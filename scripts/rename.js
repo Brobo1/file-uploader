@@ -1,4 +1,4 @@
-let isRename = false;
+let isRename = true;
 function renameHandler(folderId) {
   const renameForm = document.getElementById(`rename-form${folderId}`);
   isRename = !isRename;
