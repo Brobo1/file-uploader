@@ -27,8 +27,8 @@
                             class="folder-link"
                             href="/folder<%= folder.path %>"
                     ><%= folder.name %></a>
-                    <form action="folder/rename<%= folder.path%>" method="post">
-                        <input type="hidden" value="<%= folder.id%>">
+                    <form action="/folder/rename<%= folder.path%>" method="post">
+                        <input type="hidden" name="folderId" value="<%= folder.id%>">
                         <button type="submit">Rename</button>
                     </form>
                 </div>

@@ -80,11 +80,41 @@ exports.folderGetChildrenByPath = async (userId, path) => {
 };
 
 exports.folderChangeName = async (userId, folderId, folderName) => {
-  await prisma.folder.update({
-    data: { name: folderName },
-    where: {
-      userId: userId,
-      id: folderId,
-    },
+  await prisma.$transaction(async (prisma) => {
+    const originalFolder = await prisma.folder.findFirst({
+      where: { id: folderId, userId: userId },
+    });
+
+    if (!originalFolder) {
+      return; // Or throw an error
+    }
+
+    const originalPath = originalFolder.path;
+    const newFolderPath =
+      originalPath.substring(0, originalPath.lastIndexOf("/") + 1) + folderName; // Construct new path
+
+    const children = await prisma.folder.findMany({
+      where: {
+        path: { startsWith: originalPath + "/" }, // Only direct children
+        userId: userId,
+      },
+    });
+
+    // Update renamed folder
+    await prisma.folder.update({
+      where: { id: folderId },
+      data: { name: folderName, path: newFolderPath },
+    });
+
+    for (const child of children) {
+      const updatedPath = child.path.replace(
+        originalPath + "/",
+        newFolderPath + "/",
+      );
+      await prisma.folder.update({
+        where: { id: child.id },
+        data: { path: updatedPath },
+      });
+    }
   });
 };
