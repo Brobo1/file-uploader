@@ -7,6 +7,7 @@
             rel="stylesheet"
             href="/css/style.css"
     >
+    <script src="/scripts/rename.js" defer></script>
 </head>
 <body>
 <%- include("partials/header.ejs") %>
@@ -23,14 +24,17 @@
         <div>
             <% folders.forEach((folder) => { %>
                 <div>
-                    <a
-                            class="folder-link"
-                            href="/folder<%= folder.path %>"
-                    ><%= folder.name %></a>
-                    <form action="/folder/rename<%= folder.path%>" method="post">
-                        <input type="hidden" name="folderId" value="<%= folder.id%>">
-                        <button type="submit">Rename</button>
+                    <a class="folder-link" href="/folder<%= folder.path %>"><%= folder.name %></a>
+
+                    <!-- Form for renaming -->
+                    <form action="/folder/rename<%= folder.path %>" method="post" class="rename-form" id="rename-form-<%= folder.id %>" style="display: none;">
+                        <input type="hidden" name="folderId" value="<%= folder.id %>">
+                        <input type="text" name="newFolderName" value="<%= folder.name %>">
+                        <button type="submit">Submit</button>
                     </form>
+
+                    <!-- Button to show the rename input -->
+                    <button onclick="toggleRenameForm(<%= folder.id %>)" id="rename-btn-<%= folder.id %>">Rename</button>
                 </div>
             <% }) %>
         </div>
