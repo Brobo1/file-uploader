@@ -30,7 +30,7 @@ exports.folderRename = async (req, res) => {
   await db.folderChangeName(
     req.user.id,
     parseInt(req.body.folderId),
-    `${req.body.newFolderName}`,
+    "Documents",
   );
   res.redirect("/folder");
 };
