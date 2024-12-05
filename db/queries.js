@@ -70,8 +70,6 @@ exports.folderGetChildrenByPath = async (userId, path) => {
       },
     });
 
-    console.log("Parent folder");
-    console.log(path);
     return prisma.folder.findMany({
       where: {
         userId: userId,
@@ -79,4 +77,14 @@ exports.folderGetChildrenByPath = async (userId, path) => {
       },
     });
   }
+};
+
+exports.folderChangeName = async (userId, folderId, folderName) => {
+  await prisma.folder.update({
+    data: { name: folderName },
+    where: {
+      userId: userId,
+      id: folderId,
+    },
+  });
 };

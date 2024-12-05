@@ -4,8 +4,9 @@ const folderRouter = Router();
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
-folderRouter.post("/:path(*)", folderController.addFolderPost);
+folderRouter.post("/rename/:folderPath(*)", folderController.folderRename);
+folderRouter.post("/:folderPath(*)", folderController.addFolderPost);
 
-folderRouter.get("/:path(*)", folderController.folderGet);
+folderRouter.get("/:folderPath(*)", folderController.folderGet);
 
 module.exports = folderRouter;

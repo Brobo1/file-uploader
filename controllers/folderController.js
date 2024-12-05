@@ -3,9 +3,14 @@ const passport = require("passport");
 const db = require("../db/queries");
 
 exports.folderGet = async (req, res) => {
+  let path = "/";
+  if (req.params.folderPath) {
+    path = `/${req.params.folderPath}`;
+  }
+
   const folders = await db.folderGetChildrenByPath(
     req.user.id,
-    decodeURI(req.path),
+    decodeURI(path),
   );
   res.render("folder", { folders: folders });
 };
@@ -18,4 +23,9 @@ exports.addFolderPost = async (req, res) => {
 
   await db.folderCreate("New folder", req.user.id, folder.id);
   res.redirect("/folder" + path);
+};
+
+exports.folderRename = async (req, res) => {
+  console.log(req.path);
+  res.redirect("/folder");
 };
