@@ -3,8 +3,10 @@ const passport = require("passport");
 const db = require("../db/queries");
 
 exports.folderGet = async (req, res) => {
-  const folders = await db.folderGetChildrenByPath(req.user.id, req.path);
-  console.log(decodeURI(req.path));
+  const folders = await db.folderGetChildrenByPath(
+    req.user.id,
+    decodeURI(req.path),
+  );
   res.render("folder", { folders: folders });
 };
 

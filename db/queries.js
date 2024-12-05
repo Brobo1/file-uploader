@@ -35,13 +35,21 @@ exports.folderCreate = async (name, userId, parentId = null) => {
 
 exports.folderGet = async (userId) => {
   return prisma.folder.findMany({
-    select: { name: true, path: true },
+    select: {
+      name: true,
+      path: true,
+    },
     where: { userId: userId },
   });
 };
 
 exports.folderGetByPath = async (userId, path) => {
-  return prisma.folder.findFirst({ where: { userId: userId, path: path } });
+  return prisma.folder.findFirst({
+    where: {
+      userId: userId,
+      path: path,
+    },
+  });
 };
 
 exports.folderGetChildrenByPath = async (userId, path) => {
@@ -55,10 +63,19 @@ exports.folderGetChildrenByPath = async (userId, path) => {
     });
   } else {
     //Get subfolders of parent
+    const parentFolder = await prisma.folder.findFirst({
+      where: {
+        userId: userId,
+        path: path,
+      },
+    });
+
+    console.log("Parent folder");
+    console.log(path);
     return prisma.folder.findMany({
       where: {
         userId: userId,
-        path: { startsWith: `${path}/` },
+        parentId: parentFolder.id,
       },
     });
   }
