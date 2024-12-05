@@ -9,6 +9,6 @@ exports.folderGet = async (req, res) => {
 };
 
 exports.addFolderPost = async (req, res) => {
-  // await db.folderCreate("Photos2", req.user.id, 6);
+  // await db.folderCreate("Photos2", req.user.id, 1);
   res.redirect("/folder");
 };
