@@ -7,6 +7,6 @@ const upload = multer({ dest: "uploads/" });
 folderRouter.get("/", folderController.folderGet);
 folderRouter.post("/", folderController.addFolderPost);
 
-folderRouter.get("/:path", folderController.folderGet);
+folderRouter.get("/:path(*)", folderController.folderGet);
 
 module.exports = folderRouter;

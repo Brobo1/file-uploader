@@ -40,8 +40,22 @@ exports.folderGet = async (userId) => {
   });
 };
 
-exports.folderGetSpecific = async (userId, parentId) => {
-  return prisma.folder.findMany({
-    where: { userId: userId, parentId: parentId },
-  });
+exports.folderGetSpecific = async (userId, path) => {
+  if (path === "/") {
+    //Only get root folders
+    return prisma.folder.findMany({
+      where: {
+        userId: userId,
+        parentId: null,
+      },
+    });
+  } else {
+    //Get subfolders of parent
+    return prisma.folder.findMany({
+      where: {
+        userId: userId,
+        path: { startsWith: `${path}/` },
+      },
+    });
+  }
 };
