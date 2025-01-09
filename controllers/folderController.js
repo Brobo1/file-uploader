@@ -35,3 +35,8 @@ exports.folderRename = async (req, res) => {
   console.log(req.body.folderName);
   res.redirect("/folder");
 };
+
+exports.folderDelete = async (req, res) => {
+  console.log("DELETE request received:", req.params.folderId);
+  res.status(200).json({ message: "Folder deleted successfully!" });
+};
