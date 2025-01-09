@@ -24,8 +24,8 @@ header {
   margin: 20px;
 }
 
-header a,
-.folder-link {
+header,
+a {
   color: white;
   font-size: 24px;
   text-decoration: none;
@@ -60,22 +60,37 @@ header a:hover {
 #folders-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   width: 80%;
+  border-radius: 5px;
+  overflow: clip;
+  border: 1px #5d5d5d solid;
+  margin: 20px 0 0 0;
 }
 
 .folder-container {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  align-items: center;
   background-color: #313131;
   border-bottom: solid 1px #595959;
 
-  margin: 2px;
-  padding: 5px;
+  padding: 5px 10px;
   transition: 300ms;
+}
+
+.folder-container:last-child {
+  border-bottom: none;
 }
 
 .folder-container:hover {
   background-color: #595959;
+}
+
+.folder-link {
+  font-size: 36px;
+}
+
+#rename-btn {
+  font-size: 20px;
+  height: 36px;
 }

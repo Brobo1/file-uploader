@@ -60,6 +60,7 @@ exports.folderGetChildrenByPath = async (userId, path) => {
         userId: userId,
         parentId: null,
       },
+      orderBy: { createdAt: "asc" },
     });
   } else {
     //Get subfolders of parent
@@ -68,6 +69,7 @@ exports.folderGetChildrenByPath = async (userId, path) => {
         userId: userId,
         path: path,
       },
+      orderBy: { createdAt: "asc" },
     });
 
     return prisma.folder.findMany({
@@ -75,6 +77,7 @@ exports.folderGetChildrenByPath = async (userId, path) => {
         userId: userId,
         parentId: parentFolder.id,
       },
+      orderBy: { createdAt: "asc" },
     });
   }
 };
