@@ -61,8 +61,6 @@ header a:hover {
   display: flex;
   flex-direction: column;
   width: 80%;
-  border-radius: 5px;
-  overflow: clip;
   border: 1px #5d5d5d solid;
   margin: 20px 0 0 0;
 }
@@ -90,7 +88,48 @@ header a:hover {
   font-size: 36px;
 }
 
-#rename-btn {
+#rename-btn,
+#delete-btn {
   font-size: 20px;
   height: 36px;
+}
+
+.folder-button-options-container {
+  position: relative;
+  display: inline-block;
+}
+
+.folder-options {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.folder-options-buttons {
+  position: absolute;
+  top: -80px; /* Position the dropdown above the three dots */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #505050;
+  border: 1px solid #383838;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.folder-options-buttons button {
+  background-color: transparent;
+  border: none;
+  color: #e3e3e3;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.folder-options-buttons button:hover {
+  background-color: #696969;
+  border-radius: 3px;
 }

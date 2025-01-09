@@ -1,12 +1,15 @@
-function folderButtonHandler(folderId) {
-  const btnContainer = document.getElementById(
-    `folder-button-container${folderId}`,
+function folderButtonHandlerOver(folderId) {
+  const renameBtn = document.getElementById(
+    `folder-options-buttons${folderId}`,
   );
-  // const renameBtn = document.createElement("button");
-  // renameBtn.id = "rename-btn";
-  // const optBtn = document.createElement("img");
-  // optBtn.id = "opt-btn";
-  console.log(folderId);
+  renameBtn.style.display = "flex";
+  console.log("over");
+}
 
-  // btnContainer.append(optBtn);
+function folderButtonHandlerOut(folderId) {
+  const renameBtn = document.getElementById(
+    `folder-options-buttons${folderId}`,
+  );
+  renameBtn.style.display = "none";
+  console.log("out");
 }
