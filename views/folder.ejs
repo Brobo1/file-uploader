@@ -30,7 +30,8 @@
                     ><%= folder.name %></a>
                     <button onclick="renameHandler(<%= folder.id%>)">Rename</button>
                     <form id="rename-form<%=folder.id%>" action="/folder/rename<%= folder.path%>" method="post">
-                        <input type="hidden" name="folderId" value="<%= folder.id%>">
+                        <input type="hidden" name="folderId" value="<%= folder.id%>" aria-label="Rename">
+                        <input type="text" name="folderName" value="<%= folder.name%>" aria-label="Rename">
                         <button type="submit">Rename</button>
                     </form>
                 </div>

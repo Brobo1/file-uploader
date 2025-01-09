@@ -26,11 +26,12 @@ exports.addFolderPost = async (req, res) => {
 };
 
 exports.folderRename = async (req, res) => {
-  // console.log(req.body);
-  // await db.folderChangeName(
-  //   req.user.id,
-  //   parseInt(req.body.folderId),
-  //   "Documents",
-  // );
+  await db.folderChangeName(
+    req.user.id,
+    parseInt(req.body.folderId),
+    req.body.folderName,
+  );
+  console.log(req.body.folderName);
+  console.log("123123");
   res.redirect("/folder");
 };
