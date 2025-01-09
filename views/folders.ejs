@@ -7,7 +7,9 @@
             rel="stylesheet"
             href="/css/style.css"
     >
-    <script src="/scripts/rename.js"></script>
+    <script defer src="/scripts/rename.js"></script>
+    <script defer src="/scripts/folderOpt.js"></script>
+
 </head>
 <body>
 <%- include("partials/header.ejs") %>
@@ -24,9 +26,6 @@
         <div id="folders-container">
             <% folders.forEach((folder) => { %>
                 <%- include("partials/folder.ejs", {folder}) %>
-
-
-
             <% }) %>
         </div>
     <% } %>

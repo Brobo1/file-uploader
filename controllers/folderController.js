@@ -22,9 +22,7 @@ exports.addFolderPost = async (req, res) => {
   if (req.path !== "/") path = `/${req.params.folderPath}`;
 
   const folder = await db.folderGetByPath(req.user.id, path);
-  console.log(folder.id);
-
-  await db.folderCreate(folderName, req.user.id, folder.id);
+  await db.folderCreate(folderName, req.user.id, folder ? folder.id : null);
   res.redirect("/folder" + path);
 };
 
