@@ -21,9 +21,9 @@
             <button type="submit">Add folder</button>
         </form>
 
-        <div>
+        <div id="folders-container">
             <% folders.forEach((folder) => { %>
-                <div>
+                <div class="folder-container">
                     <a
                             class="folder-link"
                             href="/folder<%= folder.path %>"

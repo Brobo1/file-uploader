@@ -56,3 +56,27 @@ header a:hover {
   display: none;
   position: fixed;
 }
+
+#folders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+}
+
+.folder-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: #313131;
+  border-bottom: solid 1px #595959;
+
+  margin: 2px;
+  padding: 5px;
+  transition: 300ms;
+}
+
+.folder-container:hover {
+  border-radius: 4px;
+  background-color: #595959;
+}
