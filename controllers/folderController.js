@@ -13,7 +13,7 @@ exports.folderGet = async (req, res) => {
     decodeURI(path),
   );
 
-  res.render("folder", { folders: folders });
+  res.render("folders", { folders: folders });
 };
 
 exports.addFolderPost = async (req, res) => {
@@ -35,6 +35,5 @@ exports.folderRename = async (req, res) => {
     req.body.folderName,
   );
   console.log(req.body.folderName);
-  console.log("123123");
   res.redirect("/folder");
 };

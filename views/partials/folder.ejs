@@ -1,0 +1,34 @@
+<script src="/scripts/folderOpt.js"></script>
+
+<div class="folder-container">
+    <a
+            class="folder-link"
+            href="/folder<%= folder.path %>"
+    >
+        <%= folder.name %>
+    </a>
+
+    <%- include("folder-buttons.ejs", {folder})%>
+    <form
+            id="rename-form<%= folder.id %>"
+            action="/folder/rename<%= folder.path %>"
+            method="post"
+    >
+
+        <input
+                type="hidden"
+                name="folderId"
+                value="<%= folder.id %>"
+                aria-label="Rename"
+        >
+        <input
+                type="text"
+                name="folderName"
+                value="<%= folder.name %>"
+                aria-label="Rename"
+        >
+        <button
+                type="submit">Rename
+        </button>
+    </form>
+</div>

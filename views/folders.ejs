@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Folders</title>
+    <link
+            rel="stylesheet"
+            href="/css/style.css"
+    >
+    <script src="/scripts/rename.js"></script>
+</head>
+<body>
+<%- include("partials/header.ejs") %>
+<div id="container">
+    <h1>Folders</h1>
+    <% if (user) { %>
+        <form
+                action=""
+                method="post"
+        >
+            <button type="submit">Add folder</button>
+        </form>
+
+        <div id="folders-container">
+            <% folders.forEach((folder) => { %>
+                <%- include("partials/folder.ejs", {folder}) %>
+
+
+
+            <% }) %>
+        </div>
+    <% } %>
+
+</div>
+
+</body>
+</html>
