@@ -12,16 +12,19 @@ exports.folderGet = async (req, res) => {
     req.user.id,
     decodeURI(path),
   );
+
   res.render("folder", { folders: folders });
 };
 
 exports.addFolderPost = async (req, res) => {
+  let folderName = "New folder";
   let path = "";
-  if (req.path !== "/") path = `/${req.params.path}`;
+  if (req.path !== "/") path = `/${req.params.folderPath}`;
 
   const folder = await db.folderGetByPath(req.user.id, path);
+  console.log(folder.id);
 
-  await db.folderCreate("New folder", req.user.id, folder.id);
+  await db.folderCreate(folderName, req.user.id, folder.id);
   res.redirect("/folder" + path);
 };
 
