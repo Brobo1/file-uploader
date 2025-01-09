@@ -107,7 +107,7 @@ header a:hover {
 
 .folder-options-buttons {
   position: absolute;
-  top: -80px; /* Position the dropdown above the three dots */
+  top: -90px; /* Position the dropdown above the three dots */
   left: 50%;
   transform: translateX(-50%);
   background-color: #505050;
