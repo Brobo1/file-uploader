@@ -1,6 +1,6 @@
 async function deleteHandler(folderId) {
   try {
-    const res = await fetch(`/folder/delete/${folderId}`, {
+    const res = await fetch(`/folder/${folderId}/delete`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

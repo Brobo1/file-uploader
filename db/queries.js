@@ -18,6 +18,27 @@ exports.userSignup = async (username, password) => {
   });
 };
 
+exports.rootFolderGet = async (userId) => {
+  try {
+    return await prisma.folder.findFirst({
+      where: { userId, parentId: null },
+    });
+  } catch (err) {
+    console.error("No root folder found", err);
+  }
+};
+
+exports.folderGet = async (userId, folderId) => {
+  try {
+    return prisma.folder.findFirst({
+      where: { userId: userId, id: parseInt(folderId) },
+      include: { parent: true, subFolders: true, files: true },
+    });
+  } catch (err) {
+    console.error("Error getting folder2", err);
+  }
+};
+
 exports.folderCreate = async (name, userId, parentId) => {
   try {
     return prisma.folder.create({
@@ -29,45 +50,6 @@ exports.folderCreate = async (name, userId, parentId) => {
     });
   } catch (err) {
     console.error("Error creating folder", err);
-  }
-};
-
-exports.folderGetByPath = async (userId, path) => {
-  return prisma.folder.findFirst({
-    where: {
-      userId: userId,
-      path: path,
-    },
-  });
-};
-
-exports.folderGetChildrenByPath = async (userId, path) => {
-  if (path === "/") {
-    //Only get root folders
-    return prisma.folder.findMany({
-      where: {
-        userId: userId,
-        parentId: null,
-      },
-      orderBy: { createdAt: "asc" },
-    });
-  } else {
-    //Get subfolders of parent
-    const parentFolder = await prisma.folder.findFirst({
-      where: {
-        userId: userId,
-        path: path,
-      },
-      orderBy: { createdAt: "asc" },
-    });
-
-    return prisma.folder.findMany({
-      where: {
-        userId: userId,
-        parentId: parentFolder.id,
-      },
-      orderBy: { createdAt: "asc" },
-    });
   }
 };
 
@@ -104,27 +86,5 @@ exports.fileGet = async (userId, folderId) => {
   } catch (err) {
     console.error("Error getting file", err);
     throw err;
-  }
-};
-
-exports.folderGet = async (userId, folderId) => {
-  try {
-    return prisma.folder.findFirst({
-      where: { userId: userId, id: parseInt(folderId) },
-      include: { parent: true, subFolders: true, files: true },
-    });
-  } catch (err) {
-    console.error("Error getting folder2", err);
-  }
-};
-
-exports.rootFolderGet = async (userId) => {
-  try {
-    const root = await prisma.folder.findFirst({
-      where: { userId, parentId: null },
-    });
-    return root;
-  } catch (err) {
-    console.error("No root folder found", err);
   }
 };
