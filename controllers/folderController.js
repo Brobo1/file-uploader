@@ -12,32 +12,26 @@ exports.rootGet = async (req, res) => {
 };
 
 exports.folderGet = async (req, res) => {
-  let folder = await db.folderGet2(req.user.id, req.params.folderId);
-  res.render("folders", { folders: folder.subFolders, files: folder.files });
+  let folder = await db.folderGet(req.user.id, req.params.folderId);
+  res.render("folders", { folders: folder, files: folder.files });
 };
 
 exports.addFolderPost = async (req, res) => {
-  let folderName = "New folder";
-  let path = "";
-  if (req.path !== "/") path = `/${req.params.folderPath}`;
-
-  const folder = await db.folderGetByPath(req.user.id, path);
-  await db.folderCreate(folderName, req.user.id, folder ? folder.id : null);
-  res.redirect("/folder" + path);
+  let parentId = req.params.folderId;
+  await db.folderCreate("New Folder", req.user.id, parentId);
+  res.redirect(`/folder/${parentId}`);
 };
 
 exports.folderRename = async (req, res) => {
-  await db.folderChangeName(
+  await db.folderRename(
     req.user.id,
     parseInt(req.body.folderId),
     req.body.folderName,
   );
-  let folderPath = req.params.folderPath;
-  res.redirect(`/folder/${path.dirname(folderPath)}`);
+  res.redirect(`/folder`);
 };
 
 exports.folderDelete = async (req, res) => {
-  console.log("DELETE request received:", req.params.folderId);
   await db.folderDelete(req.user.id, parseInt(req.params.folderId));
   res.status(200).json({ message: "Folder deleted successfully!" });
 };

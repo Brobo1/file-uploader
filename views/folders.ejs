@@ -18,17 +18,17 @@
     <h1>Folders</h1>
     <% if (user) { %>
         <form
-                action=""
+                action="/folder/<%= folders.id%>/create-folder"
                 method="post"
         >
             <button type="submit">Add folder</button>
         </form>
 
         <div id="folders-container">
-            <% /*  %>
-            <% folders.forEach((folder) => { %>
+            <% folders.subFolders.forEach((folder) => { %>
                 <%- include("partials/folder.ejs", {folder}) %>
             <% }) %>
+            <% /*  %>
             <%  files.forEach((file) => {  %>
             <%- include("partials/file.ejs", {file}) %>
             <%  })  %>

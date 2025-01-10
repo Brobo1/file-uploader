@@ -18,34 +18,18 @@ exports.userSignup = async (username, password) => {
   });
 };
 
-exports.folderCreate = async (name, userId, parentId = null) => {
-  let path;
-  if (parentId) {
-    const parent = await prisma.folder.findFirst({
-      where: { id: parentId },
+exports.folderCreate = async (name, userId, parentId) => {
+  try {
+    return prisma.folder.create({
+      data: {
+        name: name,
+        userId: userId,
+        parentId: parseInt(parentId),
+      },
     });
-    path = `${parent.path}/${name}`;
-  } else {
-    path = `/${name}`;
+  } catch (err) {
+    console.error("Error creating folder", err);
   }
-  await prisma.folder.create({
-    data: {
-      name: name,
-      path: path,
-      userId: userId,
-      parentId: parentId,
-    },
-  });
-};
-
-exports.folderGet = async (userId) => {
-  return prisma.folder.findMany({
-    select: {
-      name: true,
-      path: true,
-    },
-    where: { userId: userId },
-  });
 };
 
 exports.folderGetByPath = async (userId, path) => {
@@ -87,44 +71,20 @@ exports.folderGetChildrenByPath = async (userId, path) => {
   }
 };
 
-exports.folderChangeName = async (userId, folderId, folderName) => {
-  await prisma.$transaction(async (prisma) => {
-    const originalFolder = await prisma.folder.findFirst({
-      where: { id: folderId, userId: userId },
-    });
-
-    if (!originalFolder) {
-      return; // Or throw an error
-    }
-
-    const originalPath = originalFolder.path;
-    const newFolderPath =
-      originalPath.substring(0, originalPath.lastIndexOf("/") + 1) + folderName; // Construct new path
-
-    const children = await prisma.folder.findMany({
+exports.folderRename = async (userId, folderId, folderName) => {
+  try {
+    return prisma.folder.update({
+      data: {
+        name: folderName,
+      },
       where: {
-        path: { startsWith: originalPath + "/" }, // Only direct children
-        userId: userId,
+        userId,
+        id: folderId,
       },
     });
-
-    // Update renamed folder
-    await prisma.folder.update({
-      where: { id: folderId },
-      data: { name: folderName, path: newFolderPath },
-    });
-
-    for (const child of children) {
-      const updatedPath = child.path.replace(
-        originalPath + "/",
-        newFolderPath + "/",
-      );
-      await prisma.folder.update({
-        where: { id: child.id },
-        data: { path: updatedPath },
-      });
-    }
-  });
+  } catch (err) {
+    console.error("Error renaming folder", err);
+  }
 };
 
 exports.folderDelete = async (userId, folderId) => {
@@ -147,7 +107,7 @@ exports.fileGet = async (userId, folderId) => {
   }
 };
 
-exports.folderGet2 = async (userId, folderId) => {
+exports.folderGet = async (userId, folderId) => {
   try {
     return prisma.folder.findFirst({
       where: { userId: userId, id: parseInt(folderId) },
