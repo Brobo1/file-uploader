@@ -1,19 +1,19 @@
 const { validationResult } = require("express-validator");
 const passport = require("passport");
 const db = require("../db/queries");
-const path = require("path")
+const path = require("path");
+const { render } = require("ejs");
+
+exports.rootGet = async (req, res) => {
+  const userId = req.user.id;
+  const root = await db.rootFolderGet(userId);
+
+  res.redirect(`/folder/${root.id}`);
+};
 
 exports.folderGet = async (req, res) => {
-  let path = "/";
-  if (req.params.folderPath) {
-    path = `/${req.params.folderPath}`;
-  }
-
-  const folders = await db.folderGetChildrenByPath(
-    req.user.id,
-    decodeURI(path),
-  );
-  res.render("folders", { folders: folders });
+  let folder = await db.folderGet2(req.user.id, req.params.folderId);
+  res.render("folders", { folders: folder.subFolders, files: folder.files });
 };
 
 exports.addFolderPost = async (req, res) => {
@@ -32,7 +32,7 @@ exports.folderRename = async (req, res) => {
     parseInt(req.body.folderId),
     req.body.folderName,
   );
-  let folderPath = req.params.folderPath
+  let folderPath = req.params.folderPath;
   res.redirect(`/folder/${path.dirname(folderPath)}`);
 };
 

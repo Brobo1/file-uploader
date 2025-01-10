@@ -1,0 +1,33 @@
+<div class="file-container">
+    <div class="file-name-container">
+        <img src="../../assets/file-earmark.svg" alt="File icon">
+        <a
+                class="folder-link"
+        >
+            <%= file.name %>
+        </a>
+    </div>
+
+    <form
+            id="rename-form<%= file.id %>"
+            action="/folder/rename<%= file.path %>"
+            method="post"
+    >
+
+        <input
+                type="hidden"
+                name="fileId"
+                value="<%= file.id %>"
+                aria-label="Rename"
+        >
+        <input
+                type="text"
+                name="fileName"
+                value="<%= file.name %>"
+                aria-label="Delete"
+        >
+        <button
+                type="submit">Rename
+        </button>
+    </form>
+</div>

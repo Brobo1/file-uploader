@@ -25,9 +25,15 @@
         </form>
 
         <div id="folders-container">
+            <% /*  %>
             <% folders.forEach((folder) => { %>
                 <%- include("partials/folder.ejs", {folder}) %>
             <% }) %>
+            <%  files.forEach((file) => {  %>
+            <%- include("partials/file.ejs", {file}) %>
+            <%  })  %>
+            <%  */ %>
+
         </div>
     <% } %>
 

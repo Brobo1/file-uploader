@@ -134,13 +134,13 @@ header a:hover {
   border-radius: 3px;
 }
 
-.folder-name-container {
+.folder-name-container, .file-name-container {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.folder-name-container img {
+.folder-name-container img, .file-name-container img {
   width: 30px;
   height: 30px;
 }

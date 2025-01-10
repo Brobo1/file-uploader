@@ -55,7 +55,5 @@ model Folder {
   parent     Folder?  @relation("subFolder", fields: [parentId], references: [id], onDelete: Cascade)
   subFolders Folder[] @relation("subFolder")
 
-  path String
-
   files File[]
 }

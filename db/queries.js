@@ -8,6 +8,11 @@ exports.userSignup = async (username, password) => {
       data: {
         username: username,
         password: hashedPassword,
+        folders: {
+          create: {
+            name: "root",
+          },
+        },
       },
     });
   });
@@ -123,32 +128,43 @@ exports.folderChangeName = async (userId, folderId, folderName) => {
 };
 
 exports.folderDelete = async (userId, folderId) => {
-  // await prisma.$transaction(async (prisma) => {
-  //   // Fetch the folder to delete and all its children (if any)
-  //   const folderToDelete = await prisma.folder.findFirst({
-  //     where: { id: folderId, userId: userId },
-  //   });
-  //
-  //   if (!folderToDelete) {
-  //     throw new Error("Folder not found");
-  //   }
-  //
-  //   // Delete all child folders
-  //   await prisma.folder.deleteMany({
-  //     where: { path: { startsWith: folderToDelete.path }, userId: userId },
-  //   });
-  //
-  //   // Delete the folder itself
-  //   await prisma.folder.delete({
-  //     where: { id: folderId },
-  //   });
-  // });
-
   await prisma.folder.delete({
     where: {
       id: folderId,
-      userId: userId
-    }
-  })
+      userId: userId,
+    },
+  });
+};
 
+exports.fileGet = async (userId, folderId) => {
+  try {
+    return prisma.file.findMany({
+      where: { userId, folderId },
+    });
+  } catch (err) {
+    console.error("Error getting file", err);
+    throw err;
+  }
+};
+
+exports.folderGet2 = async (userId, folderId) => {
+  try {
+    return prisma.folder.findFirst({
+      where: { userId: userId, id: parseInt(folderId) },
+      include: { parent: true, subFolders: true, files: true },
+    });
+  } catch (err) {
+    console.error("Error getting folder2", err);
+  }
+};
+
+exports.rootFolderGet = async (userId) => {
+  try {
+    const root = await prisma.folder.findFirst({
+      where: { userId, parentId: null },
+    });
+    return root;
+  } catch (err) {
+    console.error("No root folder found", err);
+  }
 };
