@@ -3,7 +3,6 @@ function folderButtonHandlerOver(folderId) {
     `folder-options-buttons${folderId}`,
   );
   renameBtn.style.display = "flex";
-  console.log("over");
 }
 
 function folderButtonHandlerOut(folderId) {
@@ -11,5 +10,4 @@ function folderButtonHandlerOut(folderId) {
     `folder-options-buttons${folderId}`,
   );
   renameBtn.style.display = "none";
-  console.log("out");
 }
