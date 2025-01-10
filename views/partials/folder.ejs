@@ -1,13 +1,15 @@
-
 <div class="folder-container">
-    <a
-            class="folder-link"
-            href="/folder<%= folder.path %>"
-    >
-        <%= folder.name %>
-    </a>
+    <div class="folder-name-container">
+        <img src="../../assets/folder2.svg" alt="Folder icon">
+        <a
+                class="folder-link"
+                href="/folder<%= folder.path %>"
+        >
+            <%= folder.name %>
+        </a>
+    </div>
 
-    <%- include("folder-buttons.ejs", {folder})%>
+    <%- include("folder-buttons.ejs", {folder}) %>
     <form
             id="rename-form<%= folder.id %>"
             action="/folder/rename<%= folder.path %>"

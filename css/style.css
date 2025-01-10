@@ -133,3 +133,14 @@ header a:hover {
   background-color: #696969;
   border-radius: 3px;
 }
+
+.folder-name-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.folder-name-container img {
+  width: 30px;
+  height: 30px;
+}

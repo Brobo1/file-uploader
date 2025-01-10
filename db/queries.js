@@ -123,24 +123,32 @@ exports.folderChangeName = async (userId, folderId, folderName) => {
 };
 
 exports.folderDelete = async (userId, folderId) => {
-  await prisma.$transaction(async (prisma) => {
-    // Fetch the folder to delete and all its children (if any)
-    const folderToDelete = await prisma.folder.findFirst({
-      where: { id: folderId, userId: userId },
-    });
+  // await prisma.$transaction(async (prisma) => {
+  //   // Fetch the folder to delete and all its children (if any)
+  //   const folderToDelete = await prisma.folder.findFirst({
+  //     where: { id: folderId, userId: userId },
+  //   });
+  //
+  //   if (!folderToDelete) {
+  //     throw new Error("Folder not found");
+  //   }
+  //
+  //   // Delete all child folders
+  //   await prisma.folder.deleteMany({
+  //     where: { path: { startsWith: folderToDelete.path }, userId: userId },
+  //   });
+  //
+  //   // Delete the folder itself
+  //   await prisma.folder.delete({
+  //     where: { id: folderId },
+  //   });
+  // });
 
-    if (!folderToDelete) {
-      throw new Error("Folder not found");
+  await prisma.folder.delete({
+    where: {
+      id: folderId,
+      userId: userId
     }
+  })
 
-    // Delete all child folders
-    await prisma.folder.deleteMany({
-      where: { path: { startsWith: folderToDelete.path }, userId: userId },
-    });
-
-    // Delete the folder itself
-    await prisma.folder.delete({
-      where: { id: folderId },
-    });
-  });
 };
