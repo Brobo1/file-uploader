@@ -1,15 +1,18 @@
-<header>
+<header class="flex justify-between border-b border-gray-800 text-4xl p-4 " >
     <div id="login-header-container">
-        <a href="/">Home</a>
-        <%if (user)%>
-        <a href="/folder">Folders</a>
+        <% if (user) { %>
+            <a href="/folder" class="header-link-style">Folders</a>
+        <% } else{ %>
+            <a href="/login" class="header-link-style">Folders</a>
+
+        <% } %>
     </div>
     <% if (!user) { %>
         <div id="login-header-container">
-            <a href="/login">Login</a>
-            <a href="/signup">Signup</a>
+            <a href="/login" class="header-link-style">Login</a>
+            <a href="/signup" class="header-link-style">Signup</a>
         </div>
     <% } else { %>
-        <div><a href="/logout">Logout</a></div>
+        <div><a href="/logout" class="header-link-style">Logout</a></div>
     <% } %>
 </header>

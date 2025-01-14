@@ -19,7 +19,7 @@ exports.userLoginPost = async (req, res) => {
   }
 
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/folder",
     failureRedirect: "/err",
   })(req, res);
 };
@@ -35,7 +35,7 @@ exports.userSignupPost = async (req, res) => {
   }
   const { username, password } = req.body;
   await db.userSignup(username, password);
-  res.redirect("/");
+  res.redirect("/folder");
 };
 
 exports.userLogoutGet = async (req, res) => {
@@ -43,7 +43,7 @@ exports.userLogoutGet = async (req, res) => {
     if (err) {
       res.status(400).send("Logout failed");
     }
-    res.redirect("/");
+    res.redirect("/login");
   });
 };
 

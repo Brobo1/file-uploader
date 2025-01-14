@@ -28,7 +28,6 @@ exports.folderRename = async (req, res) => {
     parseInt(req.body.folderId),
     req.body.folderName,
   );
-  console.log(req.params.folderId, req.body.folderId);
   res.redirect(`/folder/${req.params.folderId}`);
 };
 

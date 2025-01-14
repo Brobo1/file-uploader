@@ -5,7 +5,7 @@
     <title>Folders</title>
     <link
             rel="stylesheet"
-            href="/css/style.css"
+            href="/css/output.css"
     >
     <script defer src="/scripts/rename.js"></script>
     <script defer src="/scripts/folderOpt.js"></script>
@@ -15,16 +15,17 @@
 <body>
 <%- include("partials/header.ejs") %>
 <div id="container">
-    <h1>Folders</h1>
+
     <% if (user) { %>
         <form
                 action="/folder/<%= folders.id%>/create-folder"
                 method="post"
         >
-            <button type="submit">Add folder</button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add folder</button>
         </form>
 
         <div id="folders-container">
+            <div id="folder-header" ></div>
             <% folders.subFolders.forEach((folder) => { %>
                 <%- include("partials/folder.ejs", {folder}) %>
             <% }) %>
