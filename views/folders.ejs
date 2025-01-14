@@ -14,17 +14,30 @@
 </head>
 <body>
 <%- include("partials/header.ejs") %>
-<div id="container">
+<div id="container" class="flex gap-2 flex-col m-auto items-center w-3/4 mt-4">
 
     <% if (user) { %>
-        <form
-                action="/folder/<%= folders.id%>/create-folder"
-                method="post"
-        >
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add folder</button>
-        </form>
+        <div id="add-folder-container" class="flex gap-2 w-full justify-end">
+            <form
+                    action="/folder/<%= folders.id%>/create-folder"
+                    method="post"
+            >
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    Add folder
+                </button>
+            </form>
+            <form
+                    action="/folder/<%= folders.id%>/create-folder"
+                    method="post"
+            >
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    Add File
+                </button>
+            </form>
 
-        <div id="folders-container">
+        </div>
+
+        <div id="folders-container" class="w-full">
             <div id="folder-header" ></div>
             <% folders.subFolders.forEach((folder) => { %>
                 <%- include("partials/folder.ejs", {folder}) %>
@@ -38,6 +51,71 @@
         </div>
     <% } %>
 
+
+        <section class="container px-4 mx-auto ">
+            <div class=" sm:flex  sm:justify-end ">
+
+                <div class="flex items-center mt-4 gap-x-3">
+                    <button class="w-1/2 px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
+                        Add folder
+                    </button>
+
+                    <button class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                        <span>Upload file</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex flex-col mt-6">
+                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 dark:bg-gray-800">
+                                <tr>
+                                    <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        <div class="flex items-center gap-x-3">
+                                            <span>File name</span>
+                                        </div>
+                                    </th>
+
+                                    <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        File size
+                                    </th>
+
+                                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        Date uploaded
+                                    </th>
+
+                                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        Last updated
+                                    </th>
+
+                                    <th scope="col" class="relative py-3.5 px-4">
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                <% folders.subFolders.forEach((folder) => { %>
+                                    <%- include("partials/folder.ejs", {folder}) %>
+                                <% }) %>
+                                <% /*  %>
+                                <%  files.forEach((file) => {  %>
+                                <%- include("partials/file.ejs", {file}) %>
+                                <%  })  %>
+                                <%  */ %>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
 </div>
 
 </body>

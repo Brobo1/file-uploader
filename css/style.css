@@ -10,14 +10,6 @@ body {
   color: #f5f5f5;
 }
 
-#container {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  align-items: center;
-  margin: auto;
-}
-
 form {
   width: fit-content;
 }
@@ -46,14 +38,6 @@ form {
 [id*="rename-form"] {
   display: none;
   position: fixed;
-}
-
-#folders-container {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  border: 1px #5d5d5d solid;
-  margin: 20px 0 0 0;
 }
 
 .folder-container {
