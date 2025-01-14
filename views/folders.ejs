@@ -29,15 +29,17 @@
                         Add folder
                     </button>
                 </form>
+
+                <button class="flex items-center justify-center  px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                    <span>Upload file</span>
+                </button>
+
                 <form
                         action="/folder/<%= folders.id %>/upload-file"
                         method="post"
                         enctype="multipart/form-data"
                 >
                     <input type="file" name="uploaded_file">
-                    <button class="flex items-center justify-center  px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-                        <span>Upload file</span>
-                    </button>
                 </form>
             </div>
 
@@ -77,13 +79,13 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
                                 <% folders.subFolders.forEach((folder) => { %>
-                                    <%- include("partials/folder2.ejs", {folder}) %>
+                                    <%- include("partials/folder.ejs", {folder}) %>
                                 <% }) %>
-                                <% /*     %>
-                                <%     files.forEach((file) => {     %>
+                                <% /*      %>
+                                <%      files.forEach((file) => {      %>
                                 <%- include("partials/file.ejs", {file}) %>
-                                <%     })     %>
-                                <%     */ %>
+                                <%      })      %>
+                                <%      */ %>
 
                                 </tbody>
                             </table>
