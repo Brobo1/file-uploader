@@ -35,11 +35,6 @@ form {
   font-size: 20px;
 }
 
-[id*="rename-form"] {
-  display: none;
-  position: fixed;
-}
-
 .folder-container {
   display: flex;
   justify-content: space-between;
