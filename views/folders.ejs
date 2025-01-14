@@ -10,7 +10,7 @@
     <script defer src="/scripts/rename.js"></script>
     <script defer src="/scripts/folderOpt.js"></script>
     <script defer src="/scripts/delete.js"></script>
-
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
 <%- include("partials/header.ejs") %>
@@ -58,8 +58,9 @@
                 <form
                         action="/folder/<%= folders.id %>/create-folder"
                         method="post"
+                        class="w-1/2"
                 >
-                    <button class="w-1/2 px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
+                    <button class=" px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
                         Add folder
                     </button>
                 </form>
@@ -73,8 +74,8 @@
         <div class="flex flex-col mt-6">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                    <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <div class=" border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 ">
                             <thead class="bg-gray-50 dark:bg-gray-800">
                             <tr>
                                 <th scope="col"
