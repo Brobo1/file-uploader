@@ -1,8 +1,9 @@
-<tr class="hover:bg-red-600">
+<tr class="hover:bg-gray-100 dark:hover:bg-[#0d1421] cursor-pointer"
+    onclick="window.location.href='/folder/<%= folder.id %>'">
     <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
         <div class="inline-flex items-center gap-x-3">
             <div class="flex items-center gap-x-2">
-                <div class="flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-full dark:bg-gray-800">
+                <div class="bgred flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-full dark:bg-gray-800">
                     <svg width="16" height="16" fill="currentColor" class="text-black dark:text-white "
                          viewBox="0 0 16 16">
                         <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5zM2.5 3a.5.5 0 0 0-.5.5V6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3zM14 7H2v5.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5z"/>
@@ -18,13 +19,40 @@
     <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
         -
     </td>
-    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 4, 2022</td>
-    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 4, 2022</td>
+    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+        <%= formatDate(folder.createdAt)%>
+    </td>
+    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+        Jan 4, 2022
+    </td>
     <td class="text-sm whitespace-nowrap">
-        <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-blue-500">
+        <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-blue-500 hover:text-gray-100">
             <svg width="16" height="16" class="dark:text-white" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
             </svg>
         </button>
+        <%- include("folder-buttons.ejs", {folder}) %>
+        <form
+                id="rename-form<%= folder.id %>"
+                action="/folder/<%= folders.id%>/rename"
+                method="post"
+        >
+
+            <input
+                    type="hidden"
+                    name="folderId"
+                    value="<%= folder.id %>"
+                    aria-label="Rename"
+            >
+            <input
+                    type="text"
+                    name="folderName"
+                    value="<%= folder.name %>"
+                    aria-label="Delete"
+            >
+            <button
+                    type="submit">Rename
+            </button>
+        </form>
     </td>
 </tr>

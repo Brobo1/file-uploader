@@ -1,0 +1,1 @@
+function folderOnClickHandler(folderId) {}

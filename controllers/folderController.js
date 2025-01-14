@@ -3,6 +3,7 @@ const passport = require("passport");
 const db = require("../db/queries");
 const path = require("path");
 const { render } = require("ejs");
+const formatDate = require("../scripts/utility/date");
 
 exports.rootGet = async (req, res) => {
   const userId = req.user.id;
@@ -13,7 +14,7 @@ exports.rootGet = async (req, res) => {
 
 exports.folderGet = async (req, res) => {
   let folder = await db.folderGet(req.user.id, req.params.folderId);
-  res.render("folders", { folders: folder, files: folder.files });
+  res.render("folders", { folders: folder, files: folder.files, formatDate });
 };
 
 exports.addFolderPost = async (req, res) => {
