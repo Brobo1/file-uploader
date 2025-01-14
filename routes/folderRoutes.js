@@ -10,8 +10,10 @@ folderRouter.post("/:folderId/create-folder", folderController.addFolderPost);
 folderRouter.delete("/:folderId/delete", folderController.folderDelete);
 folderRouter.post("/:folderId/rename", folderController.folderRename);
 
-folderRouter.post("/:folderId/upload-file", upload.any(), function (req, res) {
-  console.log(req.files, req.body);
-});
+folderRouter.post(
+  "/:folderId/upload-file",
+  upload.any(),
+  folderController.fileUpload,
+);
 
 module.exports = folderRouter;

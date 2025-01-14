@@ -14,7 +14,11 @@ exports.rootGet = async (req, res) => {
 
 exports.folderGet = async (req, res) => {
   let folder = await db.folderGet(req.user.id, req.params.folderId);
-  res.render("folders", { folders: folder, files: folder.files, formatDate });
+  res.render("folders", {
+    folders: folder,
+    files: folder.files,
+    formatDate,
+  });
 };
 
 exports.addFolderPost = async (req, res) => {
@@ -38,5 +42,12 @@ exports.folderDelete = async (req, res) => {
 };
 
 exports.fileUpload = async (req, res) => {
-  console.log(req.file, req.body);
+  const files = req.files;
+
+  for (const file of files) {
+    console.log(file);
+    await db.filePost(1, req.params.folderId, file.originalname, file.size);
+  }
+
+  res.redirect(`/folder/${req.params.folderId}`);
 };

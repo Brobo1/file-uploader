@@ -88,3 +88,13 @@ exports.fileGet = async (userId, folderId) => {
     throw err;
   }
 };
+
+exports.filePost = async (userId, folderId, fileName, size) => {
+  try {
+    return prisma.file.create({
+      data: { name: fileName, folderId: parseInt(folderId), size },
+    });
+  } catch (err) {
+    console.error("Error uploading file", err);
+  }
+};

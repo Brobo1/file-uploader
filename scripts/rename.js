@@ -12,8 +12,8 @@ function renameHandler(folderId) {
 
   document.addEventListener("click", handleClickOutside);
 
-  function handleClickOutside(event) {
-    if (!renameForm.contains(event.target)) {
+  function handleClickOutside(e) {
+    if (!renameForm.contains(e.target)) {
       renameForm.classList.add("hidden");
       renameForm.classList.remove("flex");
       document.removeEventListener("click", handleClickOutside); // Clean up listener

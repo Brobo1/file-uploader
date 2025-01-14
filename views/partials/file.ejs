@@ -1,33 +1,80 @@
-<div class="file-container">
-    <div class="file-name-container">
-        <img src="../../assets/file-earmark.svg" alt="File icon">
-        <a
-                class="folder-link"
-        >
-            <%= file.name %>
-        </a>
-    </div>
-
-    <form
-            id="rename-form<%= file.id %>"
-            action="/folder/rename<%= file.path %>"
-            method="post"
+<tr class="hover:bg-gray-100 dark:hover:bg-[#0d1421] cursor-pointer"
     >
+    <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+        <div class="inline-flex items-center gap-x-3">
+            <div class="flex items-center gap-x-2">
+                <div class="bgred flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-full dark:bg-gray-800">
+                    <svg width="16" height="16" fill="currentColor" class="text-black dark:text-white "
+                         viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                    </svg>
+                </div>
 
-        <input
-                type="hidden"
-                name="fileId"
-                value="<%= file.id %>"
-                aria-label="Rename"
-        >
-        <input
-                type="text"
-                name="fileName"
-                value="<%= file.name %>"
-                aria-label="Delete"
-        >
-        <button
-                type="submit">Rename
-        </button>
-    </form>
-</div>
+                <div>
+                    <h2 class="font-normal text-gray-800 dark:text-white "><%= file.name %></h2>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
+        -
+    </td>
+    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+        <%= formatDate(file.createdAt) %>
+    </td>
+    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+        Jan 4, 2022
+    </td>
+    <td class="text-sm whitespace-nowrap">
+        <% /* %>
+        <div class="relative flex">
+            <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-blue-500 hover:text-gray-100">
+                <svg width="16" height="16" class="dark:text-white" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                </svg>
+            </button>
+
+            <div class="absolute ">
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+        </div>
+        <% */ %>
+        <div x-data="{ isOpen: false }" class="flex items-center">
+
+
+            <div class="relative ">
+                <!-- Menu toggle button -->
+                <button @click.stop="isOpen = !isOpen"
+                        class="relative z-10 block p-2 transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                    </svg>
+                </button>
+
+                <!-- Menu list -->
+                <div x-show="isOpen"
+                     @click.away="isOpen = false"
+                     x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="opacity-0 scale-90"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-90"
+                     class="absolute right-0 z-20 w-48 mt-2 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800"
+                >
+                    <a href="#" @click.stop onclick="deleteHandler(<%= file.id %>)"
+                       class="block px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform border-b dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">Delete
+                        <span class="text-gray-600 dark:text-gray-400">IMAGE</span></a>
+
+                    <a href="#" @click.stop onclick="renameHandler(<%= file.id %>)"
+                       class="block px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">Rename
+                        <span class="text-gray-600 dark:text-gray-400">IMAGE</span></a>
+
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
