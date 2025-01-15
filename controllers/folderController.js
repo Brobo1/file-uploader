@@ -1,8 +1,4 @@
-const { validationResult } = require("express-validator");
-const passport = require("passport");
 const db = require("../db/queries");
-const path = require("path");
-const { render } = require("ejs");
 const formatDate = require("../scripts/utility/date");
 
 exports.rootGet = async (req, res) => {
@@ -36,12 +32,6 @@ exports.fileUpload = async (req, res) => {
   }
 
   res.redirect(`/folder/${req.params.folderId}`);
-};
-
-exports.fileDelete = async (req, res) => {
-  await db.fileDelete(req.user.id, req.params.fileId, req.params.folderId);
-
-  res.status(200).json({ message: "Folder deleted successfully!" });
 };
 
 exports.itemDelete = async (req, res) => {
