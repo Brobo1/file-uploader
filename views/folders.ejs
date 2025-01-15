@@ -69,10 +69,24 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
                         <% folders.subFolders.forEach((folder) => { %>
-                            <%- include("partials/folder.ejs", {folder}) %>
+                            <%- include("partials/item.ejs", {
+                                    id: folder.id,
+                                    name: folder.name,
+                                    createdAt: folder.createdAt,
+                                    size: "-",
+                                    type: "folder"
+                                    })
+                            %>
                         <% }) %>
                         <% files.forEach((file) => { %>
-                            <%- include("partials/file.ejs", {file}) %>
+                            <%- include("partials/item.ejs", {
+                                    id: file.id,
+                                    name: file.name,
+                                    createdAt: file.createdAt,
+                                    size: file.size,
+                                    type: "file"
+                                    })
+                            %>
                         <% }) %>
                         </tbody>
                     </table>

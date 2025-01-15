@@ -1,4 +1,4 @@
-async function deleteHandler(type, id) {
+async function deleteHandler(id, type) {
   try {
     const res = await fetch(`/folder/${type}/${id}/delete`, {
       method: "delete",
@@ -13,6 +13,6 @@ async function deleteHandler(type, id) {
       location.reload();
     }
   } catch (err) {
-    console.error("Error deleting folder", err);
+    console.error(`Error deleting ${type}`, err);
   }
 }
