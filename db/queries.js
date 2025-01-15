@@ -135,4 +135,14 @@ exports.itemRename = async (type, id, name) => {
   }
 };
 
-exports.itemDelete = async (type, id) => {};
+exports.itemDelete = async (type, id) => {
+  try {
+    return prisma[type === "folder" ? "folder" : "file"].delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+  } catch (err) {
+    console.error(`Error deleting ${type}`, err);
+  }
+};

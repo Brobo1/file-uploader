@@ -52,11 +52,11 @@
                      x-transition:leave-end="opacity-0 scale-90"
                      class="fixed right-36 z-20 w-48 mt-2 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800"
                 >
-                    <a href="#" @click.stop onclick="deleteFolderHandler(<%= folder.id %>)"
+                    <a @click.stop onclick="deleteHandler('folder', <%= folder.id %>)"
                        class="block px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform border-b dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">Delete
                         <span class="text-gray-600 dark:text-gray-400">IMAGE</span></a>
 
-                    <a href="#" @click.stop onclick="renameHandler(<%= folder.id %>, 'folder')"
+                    <a  @click.stop onclick="renameHandler(<%= folder.id %>, 'folder')"
                        class="block px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">Rename
                         <span class="text-gray-600 dark:text-gray-400">IMAGE</span></a>
 
