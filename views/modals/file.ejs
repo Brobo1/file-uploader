@@ -1,0 +1,23 @@
+<div id="file-container-<%= id %>"
+     class="justify-center gap-2 hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-6 bg-gray-500 rounded-lg shadow-lg z-50 ">
+    <form id="rename-form-<%=type%>-<%= id %>"
+          action="/folder/<%=type%>/<%= id %>/rename"
+          method="post"
+    >
+
+        <input type="hidden"
+               name="folderId"
+               value="<%= id %>"
+               aria-label="Rename"
+        >
+        <input type="text"
+               name="itemName"
+               value="<%= name %>"
+               aria-label="Delete"
+               class="text-black"
+        >
+        <button class=" px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
+            Rename
+        </button>
+    </form>
+</div>
