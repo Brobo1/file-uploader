@@ -1,6 +1,6 @@
-function renameHandler(folderId) {
+function renameHandler(id, type) {
   const renameForm = document.getElementById(
-    `rename-form-container${folderId}`,
+    `rename-form-container-${type}-${id}`,
   );
   if (renameForm.classList.contains("hidden")) {
     renameForm.classList.remove("hidden");

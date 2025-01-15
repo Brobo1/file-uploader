@@ -27,15 +27,6 @@ exports.addFolderPost = async (req, res) => {
   res.redirect(`/folder/${parentId}`);
 };
 
-exports.folderRename = async (req, res) => {
-  await db.folderRename(
-    req.user.id,
-    parseInt(req.body.folderId),
-    req.body.folderName,
-  );
-  res.redirect(`/folder/${req.params.folderId}`);
-};
-
 exports.folderDelete = async (req, res) => {
   await db.folderDelete(req.user.id, parseInt(req.params.folderId));
   res.status(200).json({ message: "Folder deleted successfully!" });
@@ -56,4 +47,13 @@ exports.fileDelete = async (req, res) => {
   await db.fileDelete(req.user.id, req.params.fileId, req.params.folderId);
 
   res.status(200).json({ message: "Folder deleted successfully!" });
+};
+
+exports.itemDelete = async (req, res) => {
+  res.redirect(req.get("referer"));
+};
+
+exports.itemRename = async (req, res) => {
+  await db.itemRename(req.params.type, req.params.id, req.body.itemName);
+  res.redirect(req.get("referer"));
 };

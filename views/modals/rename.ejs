@@ -1,18 +1,18 @@
-<div id="rename-form-container<%= folder.id %>"
+<div id="rename-form-container-<%=type%>-<%= id %>"
      class="justify-center gap-2 hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-6 bg-gray-500 rounded-lg shadow-lg z-50 ">
-    <form id="rename-form<%= folder.id %>"
-          action="/folder/<%= folders.id %>/rename"
+    <form id="rename-form-<%=type%>-<%= id %>"
+          action="/folder/<%=type%>/<%= id %>/rename"
           method="post"
     >
 
         <input type="hidden"
                name="folderId"
-               value="<%= folder.id %>"
+               value="<%= id %>"
                aria-label="Rename"
         >
         <input type="text"
-               name="folderName"
-               value="<%= folder.name %>"
+               name="itemName"
+               value="<%= name %>"
                aria-label="Delete"
                class="text-black"
         >

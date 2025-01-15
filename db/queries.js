@@ -63,22 +63,6 @@ exports.folderCreate = async (name, userId, parentId) => {
   }
 };
 
-exports.folderRename = async (userId, folderId, folderName) => {
-  try {
-    return prisma.folder.update({
-      data: {
-        name: folderName,
-      },
-      where: {
-        userId,
-        id: folderId,
-      },
-    });
-  } catch (err) {
-    console.error("Error renaming folder", err);
-  }
-};
-
 exports.folderDelete = async (userId, folderId) => {
   await prisma.folder.delete({
     where: {
@@ -115,19 +99,6 @@ exports.filePost = async (userId, folderId, fileName, size) => {
     console.error("Error uploading file", err);
   }
 };
-//
-// exports.fileDelete = async (userId, fileId) => {
-//   try {
-//     return prisma.file.delete({
-//       where: { id: fileId },
-//       include: {
-//         folder: { where: { userId: userId } },
-//       },
-//     });
-//   } catch (err) {
-//     console.error("Error deleting file", err);
-//   }
-// };
 
 exports.fileDelete = async (userId, fileId, folderId) => {
   try {
@@ -148,3 +119,20 @@ exports.fileDelete = async (userId, fileId, folderId) => {
     console.error("Error deleting file", err);
   }
 };
+
+exports.itemRename = async (type, id, name) => {
+  try {
+    return prisma[type === "folder" ? "folder" : "file"].update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        name,
+      },
+    });
+  } catch (err) {
+    console.error(`Error renaming ${type}`, err);
+  }
+};
+
+exports.itemDelete = async (type, id) => {};
