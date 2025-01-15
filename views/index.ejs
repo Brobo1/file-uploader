@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link
-            rel="stylesheet"
-            href="/css/output.css"
-    >
+    <link rel="stylesheet" href="/css/output.css">
 </head>
 <body>
-    <%- include("partials/header.ejs") %>
+<%- include("partials/header.ejs") %>
 <div id="container">
     <h1>File Uploader</h1>
-    <%if (user) {%>
-        <p id="user-welcome">Welcome <%= user.username%></p>
+    <% if (user) { %>
+        <p id="user-welcome">Welcome <%= user.username %></p>
 
         <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
             <label for="file_name"></label>
@@ -21,7 +18,7 @@
             <input type="file" name="file_upload">
             <button type="submit">Submit</button>
         </form>
-    <%}%>
+    <% } %>
 
 </div>
 

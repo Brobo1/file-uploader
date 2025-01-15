@@ -3,45 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link
-            rel="stylesheet"
-            href="/css/output.css"
-    >
+    <link rel="stylesheet" href="/css/output.css">
 </head>
 <body>
 <%- include("partials/header.ejs") %>
 <div id="container">
     <h1>Signup</h1>
-    <form
-            action="/signup"
-            method="post"
-            id="signup-form"
+    <form action="/signup"
+          method="post"
+          id="signup-form"
     >
         <div>
             <label for="username"></label>
-            <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Username"
+            <input type="text"
+                   name="username"
+                   id="username"
+                   placeholder="Username"
             >
         </div>
         <div>
             <label for="password"></label>
-            <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
+            <input type="password"
+                   name="password"
+                   id="password"
+                   placeholder="Password"
             >
         </div>
         <div>
             <label for="confirmPassword"></label>
-            <input
-                    type="password"
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    placeholder="confirmPassword"
+            <input type="password"
+                   name="confirmPassword"
+                   id="confirmPassword"
+                   placeholder="confirmPassword"
             >
         </div>
         <button type="submit">Signup</button>

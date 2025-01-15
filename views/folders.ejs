@@ -3,36 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Folders</title>
-    <link
-            rel="stylesheet"
-            href="/css/output.css"
-    >
-    <script
-            defer
-            src="/scripts/rename.js"
-    ></script>
-    <script
-            defer
-            src="/scripts/file.js"
-    ></script>
-    <script
-            defer
-            src="/scripts/folderOpt.js"
-    ></script>
-    <script
-            defer
-            src="/scripts/delete.js"
-    ></script>
-    <script
-            src="//unpkg.com/alpinejs"
-            defer
-    ></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <script defer src="/scripts/rename.js"></script>
+    <script defer src="/scripts/file.js"></script>
+    <script defer src="/scripts/folderOpt.js"></script>
+    <script defer src="/scripts/delete.js"></script>
+    <script defer src="//unpkg.com/alpinejs"></script>
 </head>
 <body>
 <%- include("partials/header.ejs") %>
-<div
-        id="container"
-        class="flex gap-2 flex-col m-auto items-center w-3/4 mt-4"
+<div id="container"
+     class="flex gap-2 flex-col m-auto items-center w-3/4 mt-4"
 >
 
     <% if (user) { %>
@@ -40,17 +21,15 @@
         <section class="container mx-auto ">
 
             <div class="flex items-center justify-center mt-4 gap-x-3 w-full sm:justify-end">
-                <form
-                        action="/folder/<%= folders.id %>/create-folder"
-                        method="post"
+                <form action="/folder/<%= folders.id %>/create-folder"
+                      method="post"
                 >
                     <button class=" px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
                         Add folder
                     </button>
                 </form>
 
-                <button
-                        @click.stop
+                <button @click.stop
                         class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600"
                         onclick="fileHandler(<%= folders.id %>)"
                 >
@@ -66,44 +45,34 @@
                         <div class=" border border-gray-200 dark:border-gray-700 ">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 ">
                                 <thead class="bg-gray-50 dark:bg-gray-800">
-                                    <tr>
-                                        <th
-                                                scope="col"
-                                                class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                                        >
-                                            <div class="flex items-center gap-x-3">
-                                                <span>File name</span>
-                                            </div>
-                                        </th>
+                                <tr>
+                                    <th scope="col"
+                                        class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        <div class="flex items-center gap-x-3">
+                                            <span>File name</span>
+                                        </div>
+                                    </th>
 
-                                        <th
-                                                scope="col"
-                                                class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                                        >
-                                            File size
-                                        </th>
+                                    <th scope="col"
+                                        class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        File size
+                                    </th>
 
-                                        <th
-                                                scope="col"
-                                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                                        >
-                                            Created
-                                        </th>
+                                    <th scope="col"
+                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        Created
+                                    </th>
 
-                                        <th
-                                                scope="col"
-                                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                                        >
-                                            Last updated
-                                        </th>
+                                    <th scope="col"
+                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        Last updated
+                                    </th>
 
-                                        <th
-                                                scope="col"
-                                                class="relative py-3.5 px-4"
-                                        >
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
+                                    <th scope="col"
+                                        class="relative py-3.5 px-4">
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+                                </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
                                     <% folders.subFolders.forEach((folder) => { %>
