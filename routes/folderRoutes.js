@@ -15,5 +15,9 @@ folderRouter.post(
   upload.any(),
   folderController.fileUpload,
 );
+folderRouter.delete(
+  "/:folderId/delete-file/:fileId",
+  folderController.fileDelete,
+);
 
 module.exports = folderRouter;

@@ -21,7 +21,10 @@ exports.userSignup = async (username, password) => {
 exports.rootFolderGet = async (userId) => {
   try {
     return await prisma.folder.findFirst({
-      where: { userId, parentId: null },
+      where: {
+        userId,
+        parentId: null,
+      },
     });
   } catch (err) {
     console.error("No root folder found", err);
@@ -31,8 +34,15 @@ exports.rootFolderGet = async (userId) => {
 exports.folderGet = async (userId, folderId) => {
   try {
     return prisma.folder.findFirst({
-      where: { userId: userId, id: parseInt(folderId) },
-      include: { parent: true, subFolders: true, files: true },
+      where: {
+        userId: userId,
+        id: parseInt(folderId),
+      },
+      include: {
+        parent: true,
+        subFolders: true,
+        files: true,
+      },
     });
   } catch (err) {
     console.error("Error getting folder2", err);
@@ -81,7 +91,10 @@ exports.folderDelete = async (userId, folderId) => {
 exports.fileGet = async (userId, folderId) => {
   try {
     return prisma.file.findMany({
-      where: { userId, folderId },
+      where: {
+        userId,
+        folderId,
+      },
     });
   } catch (err) {
     console.error("Error getting file", err);
@@ -92,9 +105,46 @@ exports.fileGet = async (userId, folderId) => {
 exports.filePost = async (userId, folderId, fileName, size) => {
   try {
     return prisma.file.create({
-      data: { name: fileName, folderId: parseInt(folderId), size },
+      data: {
+        name: fileName,
+        folderId: parseInt(folderId),
+        size,
+      },
     });
   } catch (err) {
     console.error("Error uploading file", err);
+  }
+};
+//
+// exports.fileDelete = async (userId, fileId) => {
+//   try {
+//     return prisma.file.delete({
+//       where: { id: fileId },
+//       include: {
+//         folder: { where: { userId: userId } },
+//       },
+//     });
+//   } catch (err) {
+//     console.error("Error deleting file", err);
+//   }
+// };
+
+exports.fileDelete = async (userId, fileId, folderId) => {
+  try {
+    return prisma.folder.update({
+      where: {
+        id: parseInt(folderId),
+        userId: parseInt(userId),
+      },
+      data: {
+        files: {
+          delete: {
+            id: parseInt(fileId),
+          },
+        },
+      },
+    });
+  } catch (err) {
+    console.error("Error deleting file", err);
   }
 };

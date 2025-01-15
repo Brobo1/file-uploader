@@ -35,7 +35,7 @@ exports.userSignupPost = async (req, res) => {
   }
   const { username, password } = req.body;
   await db.userSignup(username, password);
-  res.redirect("/folder");
+  res.redirect("/login");
 };
 
 exports.userLogoutGet = async (req, res) => {
