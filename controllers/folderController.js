@@ -80,3 +80,21 @@ exports.itemRename = async (req, res) => {
   await db.itemRename(req.params.type, req.params.id, req.body.itemName);
   res.redirect(req.get("referer"));
 };
+
+exports.fileDownload = async (req, res) => {
+  const fileId = req.params.fileId;
+  const filePath = `${req.user.id}/${fileId}`;
+  const file = await db.fileGet(fileId);
+
+  const { data, error } = await supabase.storage
+    .from("users")
+    .download(filePath);
+
+  res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
+  res.setHeader("Content-Type", data.type);
+
+  const buffer = await data.arrayBuffer();
+  res.send(Buffer.from(buffer));
+
+  console.log(data);
+};

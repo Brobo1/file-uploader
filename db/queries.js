@@ -98,6 +98,16 @@ exports.filePost = async (userId, folderId, fileName, size) => {
   }
 };
 
+exports.fileGet = async (fileId) => {
+  try {
+    return prisma.file.findUnique({
+      where: { id: parseInt(fileId) },
+    });
+  } catch (err) {
+    console.error("Unable to get file", err);
+  }
+};
+
 exports.itemRename = async (type, id, name) => {
   try {
     return prisma[type === "folder" ? "folder" : "file"].update({

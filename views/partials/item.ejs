@@ -80,7 +80,12 @@
                        class="block px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >Rename
                         <span class="text-gray-600 dark:text-gray-400">IMAGE</span></a>
-
+                    <%if(type === "file") {%>
+                        <a href="/folder/<%=id%>/download" @click.stop
+                           class="block px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >Download
+                            <span class="text-gray-600 dark:text-gray-400">IMAGE</span></a>
+                    <%}%>
                 </div>
             </div>
         </div>

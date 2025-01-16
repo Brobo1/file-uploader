@@ -10,3 +10,5 @@ function fileHandler(folderId) {
     uploadForm.classList.remove("flex");
   }
 }
+
+function downloadHandler(fileId) {}

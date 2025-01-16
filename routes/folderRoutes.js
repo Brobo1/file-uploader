@@ -14,6 +14,7 @@ folderRouter.post(
   upload.any(),
   folderController.fileUpload,
 );
+folderRouter.get("/:fileId/download", folderController.fileDownload);
 
 folderRouter.post("/:type/:id/rename", folderController.itemRename);
 folderRouter.delete("/:type/:id/delete", folderController.itemDelete);
