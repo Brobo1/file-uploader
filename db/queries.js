@@ -89,6 +89,7 @@ exports.filePost = async (userId, folderId, fileName, size) => {
         name: fileName,
         folderId: parseInt(folderId),
         size,
+        storePath: ".",
       },
     });
   } catch (err) {

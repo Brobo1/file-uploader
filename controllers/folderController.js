@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const formatDate = require("../scripts/util/date");
+const { supabaseConn } = require("../scripts/util/supabase");
 
 exports.rootGet = async (req, res) => {
   const userId = req.user.id;
@@ -13,6 +14,10 @@ exports.folderGet = async (req, res) => {
     let folder = await db.folderGet(req.user.id, req.params.folderId);
 
     let folderPath = await db.folderPath(req.params.folderId);
+
+    const buckets = await supabaseConn();
+
+    console.log(buckets);
 
     res.render("folders", {
       folders: folder,

@@ -20,7 +20,7 @@ exports.userLoginPost = async (req, res) => {
 
   passport.authenticate("local", {
     successRedirect: "/folder",
-    failureRedirect: "/err",
+    failureRedirect: "/login",
   })(req, res);
 };
 
