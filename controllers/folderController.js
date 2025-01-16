@@ -1,5 +1,5 @@
 const db = require("../db/queries");
-const formatDate = require("../scripts/utility/date");
+const formatDate = require("../scripts/util/date");
 
 exports.rootGet = async (req, res) => {
   const userId = req.user.id;
@@ -9,12 +9,20 @@ exports.rootGet = async (req, res) => {
 };
 
 exports.folderGet = async (req, res) => {
-  let folder = await db.folderGet(req.user.id, req.params.folderId);
-  res.render("folders", {
-    folders: folder,
-    files: folder.files,
-    formatDate,
-  });
+  try {
+    let folder = await db.folderGet(req.user.id, req.params.folderId);
+    res.render("folders", {
+      folders: folder,
+      files: folder.files,
+      formatDate,
+    });
+  } catch (err) {
+    console.error("Error fetching folder", err);
+    return res.status(500).render("error", {
+      message: "Folder does not exist",
+      status: 500,
+    });
+  }
 };
 
 exports.addFolderPost = async (req, res) => {

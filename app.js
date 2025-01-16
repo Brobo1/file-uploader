@@ -9,6 +9,7 @@ const passport = require("passport");
 const initPassport = require("./config/passport").initPass;
 const indexRouter = require("./routes/indexRouter");
 const folderRouter = require("./routes/folderRoutes");
+const { isAuth } = require("./scripts/util/auth");
 
 initPassport(passport);
 
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
-app.use("/folder", folderRouter);
+app.use("/folder", isAuth, folderRouter);
 
 process.on("SIGINT", async () => {
   prisma.$disconnect();
