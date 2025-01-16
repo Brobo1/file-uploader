@@ -26,6 +26,7 @@ model User {
   password String
 
   folders Folder[]
+  File    File[]
 }
 
 model File {
@@ -35,6 +36,9 @@ model File {
   size      BigInt
   extension String?
   createdAt DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   folderId Int?
   folder   Folder? @relation(fields: [folderId], references: [id], onDelete: Cascade)

@@ -84,7 +84,7 @@ exports.folderCreate = async (name, userId, parentId) => {
 
 exports.filePost = async (userId, folderId, fileName, size) => {
   try {
-    return prisma.file.create({
+    const file = prisma.file.create({
       data: {
         name: fileName,
         folderId: parseInt(folderId),
@@ -122,4 +122,15 @@ exports.itemDelete = async (type, id) => {
   } catch (err) {
     console.error(`Error deleting ${type}`, err);
   }
+};
+
+exports.getAllFilesInFolder = async (folderId) => {
+  return prisma.file.findMany({
+    where: {
+      OR: [
+        { folderId: parseInt(folderId) },
+        { folder: { parentId: parseInt(folderId) } },
+      ],
+    },
+  });
 };

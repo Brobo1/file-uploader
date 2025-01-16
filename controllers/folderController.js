@@ -1,6 +1,6 @@
 const db = require("../db/queries");
 const formatDate = require("../scripts/util/date");
-const { supabaseConn } = require("../scripts/util/supabase");
+const { supabaseConn, supabase } = require("../scripts/util/supabase");
 
 exports.rootGet = async (req, res) => {
   const userId = req.user.id;
@@ -15,9 +15,9 @@ exports.folderGet = async (req, res) => {
 
     let folderPath = await db.folderPath(req.params.folderId);
 
-    const buckets = await supabaseConn();
+    let allFolders = await db.getAllFilesInFolder(req.params.folderId);
 
-    console.log(buckets);
+    console.log(allFolders);
 
     res.render("folders", {
       folders: folder,
@@ -42,10 +42,22 @@ exports.addFolderPost = async (req, res) => {
 
 exports.fileUpload = async (req, res) => {
   const files = req.files;
+  const user = req.user.id;
 
   for (const file of files) {
+    const dbFile = await db.filePost(
+      user,
+      req.params.folderId,
+      file.originalname,
+      file.size,
+    );
     console.log(file);
-    await db.filePost(1, req.params.folderId, file.originalname, file.size);
+    await supabase.storage
+      .from("users")
+      .upload(`${user}/${dbFile.id}`, file.buffer, {
+        upsert: false,
+        contentType: file.mimetype,
+      });
   }
 
   res.redirect(`/folder/${req.params.folderId}`);

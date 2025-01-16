@@ -2,7 +2,8 @@ const { Router } = require("express");
 const folderController = require("../controllers/folderController");
 const folderRouter = Router();
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 folderRouter.get("/", folderController.rootGet);
 folderRouter.get("/:folderId", folderController.folderGet);
