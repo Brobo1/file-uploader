@@ -68,28 +68,33 @@
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
-                        <% folders.subFolders.forEach((folder) => { %>
-                            <%- include("partials/item.ejs", {
-                                    id: folder.id,
-                                    name: folder.name,
-                                    createdAt: folder.createdAt,
-                                    size: "-",
-                                    type: "folder"
-                                    })
-                            %>
-                        <% }) %>
-                        <% files.forEach((file) => { %>
-                            <%- include("partials/item.ejs", {
-                                    id: file.id,
-                                    name: file.name,
-                                    createdAt: file.createdAt,
-                                    size: file.size,
-                                    type: "file"
-                                    })
-                            %>
-                        <% }) %>
+                        <% if(folders.subFolders.length > 0 || files.length > 0) { %>
+                            <% folders.subFolders.forEach((folder) => { %>
+                                <%- include("partials/item.ejs", {
+                                id: folder.id,
+                                name: folder.name,
+                                createdAt: folder.createdAt,
+                                size: "-",
+                                type: "folder"
+                                })
+                                %>
+                            <% }) %>
+                            <% files.forEach((file) => { %>
+                                <%- include("partials/item.ejs", {
+                                id: file.id,
+                                name: file.name,
+                                createdAt: file.createdAt,
+                                size: file.size,
+                                type: "file"
+                                })
+                                %>
+                            <% }) }%>
+
                         </tbody>
                     </table>
+                    <% if(folders.subFolders.length <= 0 && files.length <= 0) { %>
+                        <p class="text-2xl text-center mt-4">Empty folder</p>
+                    <%}%>
                 </div>
             </div>
 
