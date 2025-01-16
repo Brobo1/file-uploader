@@ -1,2 +1,10 @@
-
-<p><%= console.log(path) %></p>
+<div id="folder-path" class="flex gap-2">
+    <% path.forEach((path) => { %>
+        <div class="flex gap-2  text-xl">
+            <a href="/folder/<%= path.id %>" class="hover:text-blue-500">
+                <%= path.name === "root" ? "Home" : path.name %>
+            </a>
+                <p class="font-light">/</p>
+        </div>
+    <% }) %>
+</div>
