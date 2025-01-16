@@ -11,9 +11,13 @@ exports.rootGet = async (req, res) => {
 exports.folderGet = async (req, res) => {
   try {
     let folder = await db.folderGet(req.user.id, req.params.folderId);
+
+    let folderPath = await db.folderPath(req.params.folderId);
+
     res.render("folders", {
       folders: folder,
       files: folder.files,
+      path: folderPath,
       formatDate,
     });
   } catch (err) {

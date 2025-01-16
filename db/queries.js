@@ -49,6 +49,25 @@ exports.folderGet = async (userId, folderId) => {
   }
 };
 
+exports.folderPath = async (folderId) => {
+  try {
+    return prisma.$queryRaw`
+        with recursive folder_path AS(
+        select id, name, "parentId"
+        from "Folder"
+        where id = ${parseInt(folderId)}
+        union all
+        select f.id, f.name, f."parentId"
+        from "Folder" as f
+        inner join folder_path fp on fp."parentId" = f.id
+        )
+        select * from folder_path order by id;
+      `;
+  } catch (err) {
+    console.error("Error getting path", err);
+  }
+};
+
 exports.folderCreate = async (name, userId, parentId) => {
   try {
     return prisma.folder.create({
@@ -63,29 +82,6 @@ exports.folderCreate = async (name, userId, parentId) => {
   }
 };
 
-exports.folderDelete = async (userId, folderId) => {
-  await prisma.folder.delete({
-    where: {
-      id: folderId,
-      userId: userId,
-    },
-  });
-};
-
-exports.fileGet = async (userId, folderId) => {
-  try {
-    return prisma.file.findMany({
-      where: {
-        userId,
-        folderId,
-      },
-    });
-  } catch (err) {
-    console.error("Error getting file", err);
-    throw err;
-  }
-};
-
 exports.filePost = async (userId, folderId, fileName, size) => {
   try {
     return prisma.file.create({
@@ -97,26 +93,6 @@ exports.filePost = async (userId, folderId, fileName, size) => {
     });
   } catch (err) {
     console.error("Error uploading file", err);
-  }
-};
-
-exports.fileDelete = async (userId, fileId, folderId) => {
-  try {
-    return prisma.folder.update({
-      where: {
-        id: parseInt(folderId),
-        userId: parseInt(userId),
-      },
-      data: {
-        files: {
-          delete: {
-            id: parseInt(fileId),
-          },
-        },
-      },
-    });
-  } catch (err) {
-    console.error("Error deleting file", err);
   }
 };
 
