@@ -84,12 +84,13 @@ exports.folderCreate = async (name, userId, parentId) => {
 
 exports.filePost = async (userId, folderId, fileName, size) => {
   try {
-    const file = prisma.file.create({
+    return prisma.file.create({
       data: {
         name: fileName,
         folderId: parseInt(folderId),
         size,
         storePath: ".",
+        userId,
       },
     });
   } catch (err) {
@@ -132,5 +133,6 @@ exports.getAllFilesInFolder = async (folderId) => {
         { folder: { parentId: parseInt(folderId) } },
       ],
     },
+    select: { userId: true, id: true },
   });
 };

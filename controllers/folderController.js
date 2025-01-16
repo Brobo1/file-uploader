@@ -15,10 +15,6 @@ exports.folderGet = async (req, res) => {
 
     let folderPath = await db.folderPath(req.params.folderId);
 
-    let allFolders = await db.getAllFilesInFolder(req.params.folderId);
-
-    console.log(allFolders);
-
     res.render("folders", {
       folders: folder,
       files: folder.files,
@@ -64,7 +60,19 @@ exports.fileUpload = async (req, res) => {
 };
 
 exports.itemDelete = async (req, res) => {
-  await db.itemDelete(req.params.type, req.params.id);
+  const { type, id } = req.params;
+
+  if (type === "folder") {
+    const allFiles = await db.getAllFilesInFolder(id);
+    console.log(allFiles);
+    for (const file of allFiles) {
+      await supabase.storage
+        .from("users")
+        .remove([`${file.userId}/${file.id}`]);
+    }
+  }
+
+  await db.itemDelete(type, id);
   res.status(200).json({ message: `${req.params.type} deleted successfully!` });
 };
 
