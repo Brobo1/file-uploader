@@ -1,9 +1,9 @@
 const { prisma } = require("./prismaClient");
 const bcrypt = require("bcryptjs");
-const { userLogoutGet } = require("../controllers/indexController");
 
 exports.userSignup = async (username, password) => {
-  bcrypt.hash(password, 10, async (err, hashedPassword) => {
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     await prisma.user.create({
       data: {
         username: username,
@@ -15,7 +15,10 @@ exports.userSignup = async (username, password) => {
         },
       },
     });
-  });
+  } catch (err) {
+    console.error("Error during user signup", err);
+    throw err;
+  }
 };
 
 exports.rootFolderGet = async (userId) => {
@@ -28,6 +31,7 @@ exports.rootFolderGet = async (userId) => {
     });
   } catch (err) {
     console.error("No root folder found", err);
+    throw err;
   }
 };
 
