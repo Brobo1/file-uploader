@@ -1,6 +1,7 @@
 const db = require("../db/queries");
 const formatDate = require("../scripts/util/date");
-const { supabaseConn, supabase } = require("../scripts/util/supabase");
+const { supabase } = require("../scripts/util/supabase");
+const { TextDecoder } = require("util");
 
 exports.rootGet = async (req, res) => {
   const userId = req.user.id;
@@ -41,13 +42,20 @@ exports.fileUpload = async (req, res) => {
   const user = req.user.id;
 
   for (const file of files) {
+    //Decode filename as utf8 to allow special chars
+    const fileName = new TextDecoder("utf8").decode(
+      Buffer.from(file.originalname, "binary"),
+    );
+
+    //Save metadata to db
     const dbFile = await db.filePost(
       user,
       req.params.folderId,
-      file.originalname,
+      fileName,
       file.size,
     );
-    console.log(file);
+
+    //Save file to supabase
     await supabase.storage
       .from("users")
       .upload(`${user}/${dbFile.id}`, file.buffer, {
@@ -69,6 +77,8 @@ exports.itemDelete = async (req, res) => {
         .from("users")
         .remove([`${file.userId}/${file.id}`]);
     }
+  } else if (type === "file") {
+    await supabase.storage.from("users").remove([`${req.user.id}/${id}`]);
   }
 
   await db.itemDelete(type, id);
