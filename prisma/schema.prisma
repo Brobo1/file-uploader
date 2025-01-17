@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("SUPABASE_CONN_STRING")
+  provider  = "postgresql"
+  url       = env("SUPABASE_CONN_STRING")
+  directUrl = env("SUPABASE_MIG_STRING")
 }
 
 model Session {
