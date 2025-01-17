@@ -9,8 +9,9 @@ const indexRouter = require("./routes/indexRouter");
 const folderRouter = require("./routes/folderRoutes");
 const { isAuth } = require("./scripts/util/auth");
 
-const app = express();
 initPassport(passport);
+
+const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname)));
@@ -19,7 +20,7 @@ app.use(
     cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
     secret: "a santa at nasa",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: new PrismaSessionStore(prisma, {
       checkPeriod: 2 * 60 * 1000,
       dbRecordIdIsSessionId: true,
