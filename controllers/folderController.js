@@ -64,7 +64,6 @@ exports.itemDelete = async (req, res) => {
 
   if (type === "folder") {
     const allFiles = await db.getAllFilesInFolder(id);
-    console.log(allFiles);
     for (const file of allFiles) {
       await supabase.storage
         .from("users")
@@ -95,6 +94,4 @@ exports.fileDownload = async (req, res) => {
 
   const buffer = await data.arrayBuffer();
   res.send(Buffer.from(buffer));
-
-  console.log(data);
 };
