@@ -604,10 +604,6 @@ video {
   position: fixed;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .relative {
   position: relative;
 }
@@ -632,12 +628,12 @@ video {
   z-index: 20;
 }
 
-.z-50 {
-  z-index: 50;
-}
-
 .z-30 {
   z-index: 30;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .m-auto {
@@ -662,16 +658,12 @@ video {
   margin-top: 0.5rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
 .mt-3 {
   margin-top: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .block {
@@ -710,10 +702,6 @@ video {
   height: 100%;
 }
 
-.h-12 {
-  height: 3rem;
-}
-
 .w-3\/4 {
   width: 75%;
 }
@@ -732,10 +720,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-12 {
-  width: 3rem;
 }
 
 .min-w-full {
@@ -815,12 +799,12 @@ video {
   gap: 0.5rem;
 }
 
-.gap-6 {
-  gap: 1.5rem;
-}
-
 .gap-4 {
   gap: 1rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
 }
 
 .gap-x-2 {
@@ -915,26 +899,14 @@ video {
   background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
 .bg-gray-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 
-.bg-transparent {
-  background-color: transparent;
-}
-
-.bg-gray-800\/50 {
-  background-color: rgb(31 41 55 / 0.5);
-}
-
-.bg-opacity-5 {
-  --tw-bg-opacity: 0.05;
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-50 {
@@ -1089,19 +1061,14 @@ video {
   color: rgb(31 41 55 / var(--tw-text-opacity, 1));
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
-}
-
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .opacity-0 {
@@ -1213,6 +1180,10 @@ form {
   border-bottom: solid 1px #595959;
   padding: 5px 10px;
   transition: 300ms;
+}
+
+[x-cloak] {
+  display: none !important;
 }
 
 .folder-container:last-child {

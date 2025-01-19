@@ -52,7 +52,9 @@ form {
   padding: 5px 10px;
   transition: 300ms;
 }
-
+[x-cloak] {
+  display: none !important;
+}
 .folder-container:last-child {
   border-bottom: none;
 }
