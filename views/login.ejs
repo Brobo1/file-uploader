@@ -19,6 +19,13 @@
             id="login-form"
     >
         <div class="grid grid-cols-1 gap-4 mt-4 ">
+            <% if (typeof error !== "undefined" ) { %>
+                <div class="items-center text-red-500">
+                    <% error.forEach(err => { %>
+                        <p><%= err.msg %></p>
+                    <% }) %>
+                </div>
+            <% } %>
             <div>
                 <label
                         class="text-gray-700 dark:text-gray-200"

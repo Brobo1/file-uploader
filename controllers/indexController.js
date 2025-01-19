@@ -44,12 +44,16 @@ exports.userSignupGet = async (req, res) => {
 
 exports.userSignupPost = async (req, res) => {
   const error = validationResult(req);
+  const { username, password, confirmPassword } = req.body;
+  console.log(error);
   if (!error.isEmpty()) {
-    return res.status(400).render("index", { error: error.array() });
+    return res.status(400).render("signup", { error: error.array() });
   }
-  const { username, password } = req.body;
   await db.userSignup(username, password);
-  res.redirect("/login");
+  passport.authenticate("local", {
+    successRedirect: "/folder",
+    failureRedirect: "/signup",
+  })(req, res);
 };
 
 exports.userLogoutGet = async (req, res) => {
