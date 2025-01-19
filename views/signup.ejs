@@ -20,7 +20,7 @@
                 <div class="items-center text-red-500">
                     <% error.forEach(err => { %>
                         <p><%= err.msg %></p>
-                    <% }) %> 
+                    <% }) %>
                 </div>
             <% } %>
             <div>
@@ -64,8 +64,18 @@
                 </div>
             </div>
         </div>
-        <div class="flex mx-auto mt-6">
-            <button type="submit" class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Signup</button>
+        <div class="flex mx-auto flex-col">
+            <div class="flex mx-auto mt-3 mb-6">
+                <button type="submit"
+                        class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                    Signup
+                </button>
+            </div>
+            <p>or login with a demo user</p>
+            <div class="flex mx-auto mt-2">
+                <a href="/login/demo"
+                   class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Demo</a>
+            </div>
         </div>
     </form>
 </section>
