@@ -24,6 +24,20 @@ exports.userLoginPost = async (req, res) => {
   })(req, res);
 };
 
+exports.demoLoginGet = async (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/folder");
+  }
+
+  req.body.username = "demo";
+  req.body.password = "demo";
+
+  passport.authenticate("local", {
+    successRedirect: "/folder",
+    failureRedirect: "/login",
+  })(req, res);
+};
+
 exports.userSignupGet = async (req, res) => {
   res.render("signup");
 };

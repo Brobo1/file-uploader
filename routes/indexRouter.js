@@ -20,6 +20,8 @@ indexRouter.post(
   indexController.userLoginPost,
 );
 
+indexRouter.get("/login/demo", indexController.demoLoginGet);
+
 indexRouter.get("/logout", indexController.userLogoutGet);
 
 module.exports = indexRouter;

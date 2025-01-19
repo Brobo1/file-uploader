@@ -6,18 +6,17 @@
     <link rel="stylesheet" href="/css/output.css">
 </head>
 <body>
+
 <%- include("partials/header.ejs") %>
-<div id="container">
-    <h1>File Uploader</h1>
+
+<div id="container" class="flex justify-center items-center flex-col mt-4 gap-2">
     <% if (user) { %>
         <p id="user-welcome">Welcome <%= user.username %></p>
 
-        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
-            <label for="file_name"></label>
-            <input type="text" name="file_name" id="file_name">
-            <input type="file" name="file_upload">
-            <button type="submit">Submit</button>
-        </form>
+    <% } else { %>
+        <p class="text-2xl">Welcome to File uploader!</p>
+        <p><a href="/signup" class="hover:underline">Sign up</a>  or <a href="/login" class="hover:underline">login</a> to start uploading files</p>
+        <p>or test out the site with a <a href="/login/demo" class="hover:underline">Demo user</a></p>
     <% } %>
 
 </div>
