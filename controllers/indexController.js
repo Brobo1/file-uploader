@@ -10,7 +10,7 @@ exports.userLoginGet = async (req, res) => {
   res.render("login");
 };
 
-exports.userLoginPost = async (req, res) => {
+exports.userLoginPost = async (req, res, next) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res
@@ -18,9 +18,22 @@ exports.userLoginPost = async (req, res) => {
       .render("login", { title: "Login", error: error.array() });
   }
 
-  passport.authenticate("local", {
-    successRedirect: "/folder",
-    failureRedirect: "/login",
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    console.log(info);
+    if (!user) {
+      return res.status(401).render("login", {
+        title: "Login",
+        error: [{ msg: info?.message || "Login failed" }],
+      });
+    }
+
+    req.logIn(user, (loginErr) => {
+      if (loginErr) return next(loginErr);
+      return res.redirect("/folder");
+    });
   })(req, res);
 };
 
