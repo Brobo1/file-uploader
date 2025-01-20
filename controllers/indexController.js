@@ -3,6 +3,10 @@ const passport = require("passport");
 const db = require("../db/queries");
 
 exports.indexGet = async (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/folder");
+  }
+
   res.render("index");
 };
 
