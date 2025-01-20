@@ -58,7 +58,6 @@ exports.userSignupGet = async (req, res) => {
 exports.userSignupPost = async (req, res) => {
   const error = validationResult(req);
   const { username, password, confirmPassword } = req.body;
-  console.log(error);
   if (!error.isEmpty()) {
     return res.status(400).render("signup", { error: error.array() });
   }
@@ -76,8 +75,4 @@ exports.userLogoutGet = async (req, res) => {
     }
     res.redirect("/login");
   });
-};
-
-exports.uploadPost = async (req, res) => {
-  console.log(req.file, req.body);
 };
