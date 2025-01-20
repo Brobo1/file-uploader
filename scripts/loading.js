@@ -9,7 +9,6 @@ export function loadingHandler() {
   });
 
   window.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM LOADED");
     loader.classList.add("hidden");
   });
 }
