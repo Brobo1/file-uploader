@@ -3,6 +3,9 @@ const formatDate = require("../scripts/util/date");
 const { supabase } = require("../scripts/util/supabase");
 const { TextDecoder } = require("util");
 
+const STORAGE_BUCKET =
+  process.env.NODE_ENV === "dev" ? "users-dev" : "users-prod";
+
 exports.rootGet = async (req, res) => {
   const userId = req.user.id;
   const root = await db.rootFolderGet(userId);
@@ -57,7 +60,7 @@ exports.fileUpload = async (req, res) => {
 
     //Save file to supabase
     await supabase.storage
-      .from("users")
+      .from(STORAGE_BUCKET)
       .upload(`${user}/${dbFile.id}`, file.buffer, {
         upsert: false,
         contentType: file.mimetype,
@@ -74,11 +77,13 @@ exports.itemDelete = async (req, res) => {
     const allFiles = await db.getAllFilesInFolder(id);
     for (const file of allFiles) {
       await supabase.storage
-        .from("users")
+        .from(STORAGE_BUCKET)
         .remove([`${file.userId}/${file.id}`]);
     }
   } else if (type === "file") {
-    await supabase.storage.from("users").remove([`${req.user.id}/${id}`]);
+    await supabase.storage
+      .from(STORAGE_BUCKET)
+      .remove([`${req.user.id}/${id}`]);
   }
 
   await db.itemDelete(type, id);
@@ -96,7 +101,7 @@ exports.fileDownload = async (req, res) => {
   const file = await db.fileGet(fileId);
 
   const { data, error } = await supabase.storage
-    .from("users")
+    .from(STORAGE_BUCKET)
     .download(filePath);
 
   res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);

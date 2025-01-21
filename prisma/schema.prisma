@@ -10,8 +10,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("SUPABASE_CONN_STRING")
-  directUrl = env("SUPABASE_MIG_STRING")
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_MIGRATION_URL")
 }
 
 model Session {
