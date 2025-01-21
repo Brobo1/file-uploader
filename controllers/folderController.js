@@ -2,6 +2,7 @@ const db = require("../db/queries");
 const formatDate = require("../scripts/util/date");
 const { supabase } = require("../scripts/util/supabase");
 const { TextDecoder } = require("util");
+const { fileSizeShortener } = require("../scripts/util/fileSize.js");
 
 const STORAGE_BUCKET =
   process.env.NODE_ENV === "dev" ? "users-dev" : "users-prod";
@@ -18,7 +19,7 @@ exports.folderGet = async (req, res) => {
 
     let folderPath = await db.folderPath(req.params.folderId);
 
-    console.log(folder);
+    fileSizeShortener(folder);
 
     res.render("folders", {
       folders: folder,
