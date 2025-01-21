@@ -59,6 +59,7 @@
                                 <%- include("partials/item.ejs", {
                                 id: folder.id,
                                 name: folder.name,
+                                extension: null,
                                 createdAt: folder.createdAt,
                                 size: "-",
                                 type: "folder"
@@ -69,6 +70,7 @@
                                 <%- include("partials/item.ejs", {
                                 id: file.id,
                                 name: file.name,
+                                extension: file.extension,
                                 createdAt: file.createdAt,
                                 size: file.size,
                                 type: "file"

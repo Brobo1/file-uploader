@@ -49,15 +49,18 @@ exports.fileUpload = async (req, res) => {
       Buffer.from(file.originalname, "binary"),
     );
 
+    const splitFileName = fileName.split(".");
+
     //Save metadata to db
     const dbFile = await db.filePost(
       user,
       req.params.folderId,
-      fileName,
+      splitFileName[0],
+      splitFileName[1],
       file.size,
     );
 
-    //Save file to supabase
+    // Save file to supabase
     await supabase.storage
       .from(STORAGE_BUCKET)
       .upload(`${user}/${dbFile.id}`, file.buffer, {
@@ -103,7 +106,11 @@ exports.fileDownload = async (req, res) => {
     .from(STORAGE_BUCKET)
     .download(filePath);
 
-  res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
+  console.log();
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="${file.name}.${file.extension}"`,
+  );
   res.setHeader("Content-Type", data.type);
 
   const buffer = await data.arrayBuffer();

@@ -86,11 +86,12 @@ exports.folderCreate = async (name, userId, parentId) => {
   }
 };
 
-exports.filePost = async (userId, folderId, fileName, size) => {
+exports.filePost = async (userId, folderId, fileName, extension, size) => {
   try {
     return prisma.file.create({
       data: {
         name: fileName,
+        extension: extension,
         folderId: parseInt(folderId),
         size,
         storePath: ".",

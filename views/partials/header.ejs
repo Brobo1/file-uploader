@@ -16,21 +16,22 @@
 </head>
 <body>
 <%- include("loader.ejs") %>
+
 <header class="flex justify-between border-b border-gray-800 text-4xl p-4 " >
     <div id="login-header-container">
         <% if (user) { %>
-            <a href="/folder" class="header-link-style">Folders</a>
+            <a href="/folder" class="header-link-style" data-id="load">Folders</a>
         <% } else{ %>
-            <a href="/login" class="header-link-style">Folders</a>
+            <a href="/login" class="header-link-style" data-id="load">Folders</a>
 
         <% } %>
     </div>
     <% if (!user) { %>
         <div id="login-header-container">
-            <a href="/login" class="header-link-style">Login</a>
-            <a href="/signup" class="header-link-style">Signup</a>
+            <a href="/login" class="header-link-style" data-id="load">Login</a>
+            <a href="/signup" class="header-link-style" data-id="load">Signup</a>
         </div>
     <% } else { %>
-        <div><a href="/logout" class="header-link-style">Logout</a></div>
+        <div><a href="/logout" class="header-link-style" data-id="load">Logout</a></div>
     <% } %>
 </header>
