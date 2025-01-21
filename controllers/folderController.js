@@ -36,7 +36,7 @@ exports.folderGet = async (req, res) => {
 exports.addFolderPost = async (req, res) => {
   let parentId = req.params.folderId;
   await db.folderCreate("New Folder", req.user.id, parentId);
-  res.redirect(`/folder/${parentId}`);
+  await renderFolder(req.user.id, parentId, res);
 };
 
 exports.fileUpload = async (req, res) => {
