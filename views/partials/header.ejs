@@ -1,3 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Folders</title>
+
+    <link rel="icon" href="/assets/safe2-fill.svg">
+    <link rel="stylesheet" href="/css/output.css">
+
+    <script src="/scripts/main.js" type="module" defer></script>
+    <script src="/scripts/rename.js" defer></script>
+    <script src="/scripts/file.js" defer></script>
+    <script src="/scripts/folderOpt.js" defer></script>
+    <script src="/scripts/delete.js" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+<%- include("loader.ejs") %>
 <header class="flex justify-between border-b border-gray-800 text-4xl p-4 " >
     <div id="login-header-container">
         <% if (user) { %>
