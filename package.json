@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=prod&& node app.js",
-    "dev": "set NODE_ENV=dev&& node --watch app.js"
+    "dev": "set NODE_ENV=dev&& node --watch app.js",
+    "build": "rollup -c"
   },
   "engines": {
     "node": "18.x"
@@ -39,6 +40,10 @@
     "prisma": "^6.0.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.31.0",
     "tailwindcss": "^3.4.17"
   }
 }

@@ -1,4 +1,4 @@
-function fileHandler(folderId) {
+export function fileHandler(folderId) {
   const uploadForm = document.getElementById(
     `upload-form-container${folderId}`,
   );
@@ -10,5 +10,3 @@ function fileHandler(folderId) {
     uploadForm.classList.remove("flex");
   }
 }
-
-function downloadHandler(fileId) {}
