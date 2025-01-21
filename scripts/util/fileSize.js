@@ -2,7 +2,6 @@ exports.fileSizeShortener = (folder) => {
   const units = ["B", "KB", "MB", "GB"];
   const files = folder.files;
   if (!files.length) {
-    console.log(folder);
     return folder;
   }
   for (const file of files) {
@@ -15,5 +14,4 @@ exports.fileSizeShortener = (folder) => {
     }
     file.size = `${size.toFixed(2)} ${units[unitIndex]}`;
   }
-  console.log(folder);
 };

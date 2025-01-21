@@ -3,30 +3,27 @@ const formatDate = require("../scripts/util/date");
 const { supabase } = require("../scripts/util/supabase");
 const { TextDecoder } = require("util");
 const { fileSizeShortener } = require("../scripts/util/fileSize.js");
+const { renderFolder } = require("../scripts/util/renderFolder.js");
 
 const STORAGE_BUCKET =
   process.env.NODE_ENV === "dev" ? "users-dev" : "users-prod";
 
 exports.rootGet = async (req, res) => {
-  const userId = req.user.id;
-  const root = await db.rootFolderGet(userId);
-  res.redirect(`/folder/${root.id}`);
+  try {
+    const userId = req.user.id;
+    const root = await db.rootFolderGet(userId);
+
+    await renderFolder(userId, root.id, res);
+  } catch (err) {
+    console.error("Unable to get root folder", err);
+  }
 };
 
 exports.folderGet = async (req, res) => {
   try {
     let folder = await db.folderGet(req.user.id, req.params.folderId);
 
-    let folderPath = await db.folderPath(req.params.folderId);
-
-    fileSizeShortener(folder);
-
-    res.render("folders", {
-      folders: folder,
-      files: folder.files,
-      path: folderPath,
-      formatDate,
-    });
+    await renderFolder(req.user.id, folder.id, res);
   } catch (err) {
     console.error("Error fetching folder", err);
     return res.status(500).render("error", {
