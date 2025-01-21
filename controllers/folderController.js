@@ -18,6 +18,8 @@ exports.folderGet = async (req, res) => {
 
     let folderPath = await db.folderPath(req.params.folderId);
 
+    console.log(folder);
+
     res.render("folders", {
       folders: folder,
       files: folder.files,

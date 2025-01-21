@@ -18,8 +18,14 @@ export function loadingHandler() {
     });
   });
 
-  // 3) Hide loader once the page fully loads
-  window.addEventListener("DOMContentLoaded", () => {
+  function hideLoader() {
     loader.classList.add("hidden");
-  });
+  }
+
+  // 3) Hide loader once the page fully loads
+  // window.addEventListener("DOMContentLoaded", hideLoader);
+  window.addEventListener("pageshow", hideLoader);
+  // window.addEventListener("DOMContentLoaded", () => {
+  //   loader.classList.add("hidden");
+  // });
 }
