@@ -9,7 +9,6 @@ const STORAGE_BUCKET =
 exports.rootGet = async (req, res) => {
   const userId = req.user.id;
   const root = await db.rootFolderGet(userId);
-
   res.redirect(`/folder/${root.id}`);
 };
 
