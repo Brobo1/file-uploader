@@ -1,4 +1,4 @@
-function renameHandler(id, type) {
+export function renameHandler(id, type) {
   console.log(id, type);
   const renameForm = document.getElementById(
     `rename-form-container-${type}-${id}`,
