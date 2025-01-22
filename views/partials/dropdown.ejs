@@ -1,17 +1,16 @@
 <!-- Menu list -->
 <div
-    x-show="isOpen"
+    x-show="openDropdownId === <%= id %>"
     x-cloak
-    @click.away="isOpen = false"
-    x-transition:enter="transition ease-out duration-100"
+    @click.away="$dispatch('update-dropdown', { id: null })"
+    x-transition:enter="transition ease-out duration-200"
     x-transition:enter-start="opacity-0 scale-90"
     x-transition:enter-end="opacity-100 scale-100"
     x-transition:leave="transition ease-in duration-100"
     x-transition:leave-start="opacity-100 scale-100"
     x-transition:leave-end="opacity-0 scale-90"
     class="fixed z-20 -translate-x-9 mt-6
-     w-36 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800"
->
+     w-36 overflow-hidden bg-white origin-top-left rounded-lg shadow-xl dark:bg-gray-800">
 
     <a
         @click.stop
