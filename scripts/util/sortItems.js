@@ -1,44 +1,36 @@
 exports.sortItems = (items, sortBy, sortDir) => {
-  let folders = items.subFolders;
-  let files = items.files;
+  if (!sortBy) return;
 
-  if (!sortBy) {
-    return;
-  }
+  const compareName = (nameA, nameB) => {
+    const lowerA = nameA.toLowerCase();
+    const lowerB = nameB.toLowerCase();
+    return sortDir === "desc"
+      ? lowerA.localeCompare(lowerB, "en")
+      : lowerB.localeCompare(lowerA, "en");
+  };
 
-  folders.sort((a, b) => {
-    let colA = a[sortBy];
-    let colB = b[sortBy];
+  const compareDate = (dateA, dateB) => {
+    return sortDir === "desc" ? dateA - dateB : dateB - dateA;
+  };
 
+  const compareSize = (sizeA, sizeB) => {
+    const numA = parseInt(sizeA);
+    const numB = parseInt(sizeB);
+    return sortDir === "desc" ? numA - numB : numB - numA;
+  };
+
+  const compareItems = (itemA, itemB) => {
+    const valueA = itemA[sortBy];
+    const valueB = itemB[sortBy];
     if (sortBy === "name") {
-      colA = colA.toLowerCase();
-      colB = colB.toLowerCase();
-      if (sortDir === "desc") {
-        return colA.localeCompare(colB, "en");
-      } else {
-        return colB.localeCompare(colA, "en");
-      }
+      return compareName(valueA, valueB);
     } else if (sortBy === "createdAt") {
-      return sortDir === "asc" ? colB - colA : colA - colB;
-    }
-  });
-
-  files.sort((a, b) => {
-    let colA = a[sortBy];
-    let colB = b[sortBy];
-
-    if (sortBy === "name") {
-      colA = colA.toLowerCase();
-      colB = colB.toLowerCase();
-      return sortDir === "desc"
-        ? colA.localeCompare(colB, "en")
-        : colB.localeCompare(colA, "en");
-    } else if (sortBy === "createdAt") {
-      return sortDir === "asc" ? colB - colA : colA - colB;
+      return compareDate(valueA, valueB);
     } else if (sortBy === "size") {
-      colA = parseInt(colA);
-      colB = parseInt(colB);
-      return sortDir === "asc" ? colB - colA : colA - colB;
+      return compareSize(valueA, valueB);
     }
-  });
+  };
+
+  items.subFolders.sort(compareItems);
+  items.files.sort(compareItems);
 };
