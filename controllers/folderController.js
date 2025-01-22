@@ -22,8 +22,9 @@ exports.rootGet = async (req, res) => {
 exports.folderGet = async (req, res) => {
   try {
     let folder = await db.folderGet(req.user.id, req.params.folderId);
+    let { sortBy, sortDir } = req.query;
 
-    await renderFolder(req.user.id, folder.id, res);
+    await renderFolder(req.user.id, folder.id, res, sortBy, sortDir);
   } catch (err) {
     console.error("Error fetching folder", err);
     return res.status(500).render("error", {

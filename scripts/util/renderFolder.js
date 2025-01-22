@@ -2,9 +2,9 @@ const db = require("../../db/queries");
 const { fileSizeShortener } = require("./fileSize");
 const formatDate = require("./date");
 
-exports.renderFolder = async (userId, folderId, res) => {
+exports.renderFolder = async (userId, folderId, res, sortBy, sortDir) => {
   try {
-    let folder = await db.folderGet(userId, folderId);
+    let folder = await db.folderGet(userId, folderId, sortBy, sortDir);
 
     let folderPath = await db.folderPath(folderId);
 
@@ -14,6 +14,8 @@ exports.renderFolder = async (userId, folderId, res) => {
       folders: folder,
       files: folder.files,
       path: folderPath,
+      sortBy,
+      sortDir,
       formatDate,
     });
   } catch (err) {
