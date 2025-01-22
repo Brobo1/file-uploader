@@ -94,7 +94,7 @@
                     <a
                             @click.stop
                             onclick="renameHandler(<%= id %>, '<%= type %>')"
-                            class="flex justify-between px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex justify-between px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                     >Rename
                         <span class="text-gray-600 dark:text-gray-400">
                             <svg
@@ -112,7 +112,7 @@
                     <% if(type === "file") { %>
                         <a
                                 href="/folder/<%= id %>/download"
-                                class="flex justify-between px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                class="flex justify-between px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform  dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                         >Download
                             <span class="text-gray-600 dark:text-gray-400">
                                 <svg
@@ -133,7 +133,7 @@
                             @click.stop
                             data-id="load"
                             onclick="deleteHandler(<%= id %>, '<%= type %>')"
-                            class="flex justify-between items-center px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform border-t dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            class="flex justify-between items-center px-4 py-2 text-sm text-gray-800 transition-colors duration-300 transform border-t dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                     >Delete
                         <span class="text-gray-600 dark:text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
