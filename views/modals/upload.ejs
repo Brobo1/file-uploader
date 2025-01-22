@@ -1,14 +1,39 @@
 <div id="upload-form-container<%= folders.id %>"
-     class="justify-center gap-2 hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-6 bg-gray-500 rounded-lg shadow-lg z-30 ">
+     class="justify-center flex-col gap-4 hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-sm py-4 px-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-30 transition-all duration-300 ease-in-out opacity-0 scale-90 border border-gray-200 dark:border-gray-700"
+>
     <form id="upload-form<%= folders.id %>"
           action="/folder/<%= folders.id %>/upload-file"
           method="post"
           enctype="multipart/form-data"
+          class="flex flex-col gap-4"
     >
-        <input type="file" name="uploaded_file">
+        <!-- File Selection Label -->
+        <label for="uploaded_file-<%= folders.id %>" class="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Choose a file to upload:
+        </label>
 
-        <button class=" px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
-            Upload
-        </button>
+        <!-- File Input -->
+        <input type="file"
+               id="uploaded_file-<%= folders.id %>"
+               name="uploaded_file"
+               class="w-full cursor-pointer text-gray-900 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200 ease-in"
+        >
+
+        <!-- Buttons -->
+        <div class="flex items-center gap-4 justify-end">
+            <button
+                    type="button"
+                    class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200"
+                    onclick="document.getElementById('upload-form-container<%= folders.id %>').classList.add('hidden')"
+            >
+                Cancel
+            </button>
+            <button
+                    type="submit"
+                    class="px-5 py-2 text-sm text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 transition-colors duration-200"
+            >
+                Upload
+            </button>
+        </div>
     </form>
 </div>
