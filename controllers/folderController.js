@@ -106,7 +106,6 @@ exports.fileDownload = async (req, res) => {
     .from(STORAGE_BUCKET)
     .download(filePath);
 
-  console.log();
   res.setHeader(
     "Content-Disposition",
     `attachment; filename="${file.name}.${file.extension}"`,
