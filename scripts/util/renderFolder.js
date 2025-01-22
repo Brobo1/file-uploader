@@ -1,10 +1,13 @@
 const db = require("../../db/queries");
 const { fileSizeShortener } = require("./fileSize");
 const formatDate = require("./date");
+const { sortItems } = require("./sortItems");
 
 exports.renderFolder = async (userId, folderId, res, sortBy, sortDir) => {
   try {
-    let folder = await db.folderGet(userId, folderId, sortBy, sortDir);
+    let folder = await db.folderGet(userId, folderId);
+
+    sortItems(folder, sortBy, sortDir);
 
     let folderPath = await db.folderPath(folderId);
 

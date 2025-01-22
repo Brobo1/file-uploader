@@ -35,9 +35,8 @@ exports.rootFolderGet = async (userId) => {
   }
 };
 
-exports.folderGet = async (userId, folderId, sortBy, sortDir) => {
+exports.folderGet = async (userId, folderId) => {
   try {
-    let folderSortBy = sortBy === "size" ? undefined : sortBy;
     return prisma.folder.findFirst({
       where: {
         userId: userId,
@@ -45,14 +44,8 @@ exports.folderGet = async (userId, folderId, sortBy, sortDir) => {
       },
       include: {
         parent: true,
-        subFolders: {
-          orderBy: sortBy !== "size" ? { [folderSortBy]: sortDir } : undefined,
-        },
-        files: {
-          orderBy: {
-            [sortBy]: sortDir,
-          },
-        },
+        subFolders: true,
+        files: true,
       },
     });
   } catch (err) {
