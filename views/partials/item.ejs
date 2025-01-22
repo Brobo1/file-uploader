@@ -5,9 +5,7 @@
         cursor-pointer
     <% } %>
     "
-    onclick="<%= type === 'folder' ?
-            `window.location.href='/folder/${id}'` :
-            '' %>"
+    onclick="<%= type === 'folder' ? `window.location.href='/folder/${id}'` : '' %>"
     <% if (type === "folder") { %>
         data-id="load"
     <% } %>
@@ -32,13 +30,10 @@
                 </div>
 
                 <div>
-                    <h2 class="font-normal text-gray-800 dark:text-white ">
-                        <% if (extension !== null) { %>
-                            <%= name %>.<%= extension %>
-                        <% } else { %>
-                            <%= name %>
-                        <% } %>
-                    </h2>
+                    <span class="font-normal text-gray-800 dark:text-white ">
+                        <%= name %><%= extension ? '.' + extension : '' %>
+
+                    </span>
                 </div>
             </div>
         </div>
