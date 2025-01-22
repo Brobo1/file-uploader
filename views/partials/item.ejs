@@ -1,27 +1,27 @@
 <tr
-        class="
-        hover:bg-gray-100 dark:hover:bg-[#0d1421]
-        <% if (type === "folder") { %>
-            cursor-pointer
-        <% } %>
-        "
-        onclick="<%= type === 'folder' ?
-                `window.location.href='/folder/${id}'` :
-                '' %>"
-        <% if (type === "folder") { %>
-            data-id="load"
-        <% } %>
+    class="
+    hover:bg-gray-100 dark:hover:bg-[#0d1421]
+    <% if (type === "folder") { %>
+        cursor-pointer
+    <% } %>
+    "
+    onclick="<%= type === 'folder' ?
+            `window.location.href='/folder/${id}'` :
+            '' %>"
+    <% if (type === "folder") { %>
+        data-id="load"
+    <% } %>
 >
     <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
         <div class="inline-flex items-center gap-x-3">
             <div class="flex items-center gap-x-2">
                 <div class="bgred flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-full dark:bg-gray-800">
                     <svg
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="text-black dark:text-white "
-                            viewBox="0 0 16 16"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="text-black dark:text-white "
+                        viewBox="0 0 16 16"
                     >
                         <% if(type === "folder") { %>
                             <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5zM2.5 3a.5.5 0 0 0-.5.5V6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3zM14 7H2v5.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5z"/>
@@ -52,30 +52,30 @@
 
     <td class="text-sm whitespace-nowrap px-4">
         <div
-                x-data="{ isOpen: false }"
-                class="flex items-center"
+            x-data="{ isOpen: false }"
+            class="relative flex items-center"
         >
-
-            <div class="relative ">
-                <!-- Menu toggle button -->
-                <button
-                        @click.stop="isOpen = !isOpen"
-                        class="relative z-10 block p-1 transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+            <!-- Menu toggle button -->
+            <button
+                @click.stop="isOpen = !isOpen"
+                class="z-10 block p-1 transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+            >
+                <svg
+                    class="w-6 h-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                 >
-                    <svg
-                            class="w-6 h-6 text-white"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                    >
-                        <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-                        />
-                    </svg>
-                </button>
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+                    />
+                </svg>
+            </button>
+            <div >
+
             <%- include("dropdown.ejs")%>
             </div>
         </div>

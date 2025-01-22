@@ -1,90 +1,75 @@
 <%- include("partials/header.ejs") %>
 
 <div
-        id="container"
-        class="flex gap-2 flex-col m-auto items-center w-3/4 mt-4"
+    id="container"
+    class="flex gap-2 flex-col m-auto items-center w-3/4 mt-4"
 >
 
-    <% if (user) { %>
-        <section class="container mx-auto ">
-            <div class="flex items-center justify-center mt-4 gap-x-3 w-full sm:justify-end">
-                <form
-                        action="/folder/<%= folders.id %>/create-folder"
-                        method="post"
-                >
-                    <button
-                            type="submit"
-                            class=" px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700"
-                    >
-                        Add folder
-                    </button>
-                </form>
-
+<% if (user) { %>
+    <section class="container mx-auto ">
+        <div
+            class="flex items-center justify-center mt-4 gap-x-3 w-full sm:justify-end"
+        >
+            <form
+                action="/folder/<%= folders.id %>/create-folder"
+                method="post"
+            >
                 <button
-                        @click.stop
-                        type="submit"
-                        class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600"
-                        onclick="fileHandler(<%= folders.id %>)"
+                    type="submit"
+                    class=" px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700"
                 >
-                    <span>Upload file</span>
+                    Add folder
                 </button>
-                <%- include("./modals/upload.ejs", {folders}) %>
+            </form>
 
-            </div>
+            <button
+                @click.stop
+                type="submit"
+                class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600"
+                onclick="fileHandler(<%= folders.id %>)"
+            >
+                <span>Upload file</span>
+            </button>
+            <%- include("./modals/upload.ejs", {folders}) %>
 
-            <%- include("./partials/path.ejs", {path}) %>
+        </div>
 
-            <div class="flex flex-col mt-2">
-                <div class="overflow-x-auto ">
-                    <!-- Added for scrollable overflow -->
-                    <table class="whitespace-nowrap w-full min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-800">
-                            <tr>
-                                <% let nextDir = sortDir === "asc" ?
-                                        currDir = "desc" :
-                                        currDir = "asc"; %>
-                                <th
-                                        scope="col"
-                                        class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                                >
-                                    <div class="flex items-center gap-x-3">
-                                        <a href="/folder/<%= folders.id %>?sortBy=name&sortDir=<%= nextDir %>">
-                                            File name
-                                            <% if (sortBy === "name") {%>
+        <%- include("./partials/path.ejs", {path}) %>
 
-                                                <% if (sortDir === "asc") { %>
-                                                    ˄
-                                                <% } else if (sortDir === "desc") { %>
-                                                    ˅
-                                                <% }%>
-                                            <% } %>
-                                        </a>
-                                    </div>
-                                </th>
-                                <th
-                                        scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                                >
-                                    <a href="/folder/<%= folders.id %>?sortBy=size&sortDir=<%= nextDir %>">
-                                        File size
-                                        <% if (sortBy === "size") {%>
+        <div class="flex flex-col mt-2">
+            <div class="overflow-x-auto ">
+                <!-- Added for scrollable overflow -->
+                <table class="whitespace-nowrap w-full min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-800">
+                        <tr>
+                            <% let nextDir = sortDir === "asc" ?
+                                    currDir = "desc" :
+                                    currDir = "asc"; %>
+                            <th
+                                scope="col"
+                                class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            >
+                                <div class="flex items-center gap-x-3">
+                                    <a href="/folder/<%= folders.id %>?sortBy=name&sortDir=<%= nextDir %>">
+                                        File name
+                                        <% if (sortBy === "name") {%>
 
                                             <% if (sortDir === "asc") { %>
                                                 ˄
                                             <% } else if (sortDir === "desc") { %>
                                                 ˅
-                                            <% } %>
+                                            <% }%>
                                         <% } %>
                                     </a>
-
-                                </th>
-                                <th
-                                        scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                                >
-                                    <a href="/folder/<%= folders.id %>?sortBy=createdAt&sortDir=<%= nextDir %>">
-                                        Created
-                                    <% if (sortBy === "createdAt") {%>
+                                </div>
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            >
+                                <a href="/folder/<%= folders.id %>?sortBy=size&sortDir=<%= nextDir %>">
+                                    File size
+                                    <% if (sortBy === "size") {%>
 
                                         <% if (sortDir === "asc") { %>
                                             ˄
@@ -92,54 +77,71 @@
                                             ˅
                                         <% } %>
                                     <% } %>
-                                    </a>
-                                </th>
+                                </a>
 
-                                <th
-                                        scope="col"
-                                        class="relative py-3.5 px-4"
-                                >
-                                    <span class="sr-only">Edit</span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
-                            <% if(folders.subFolders.length > 0 ||
-                                    files.length > 0) { %>
-                                <% folders.subFolders.forEach((folder) => { %>
-                                    <%- include("partials/item.ejs", {
-                                    id: folder.id,
-                                    name: folder.name,
-                                    extension: null,
-                                    createdAt: folder.createdAt,
-                                    size: "-",
-                                    type: "folder"
-                                    })
-                                    %>
-                                <% }) %>
-                                <% files.forEach((file) => { %>
-                                    <%- include("partials/item.ejs", {
-                                    id: file.id,
-                                    name: file.name,
-                                    extension: file.extension,
-                                    createdAt: file.createdAt,
-                                    size: file.size,
-                                    type: "file"
-                                    })
-                                    %>
-                            <% }) } %>
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            >
+                                <a href="/folder/<%= folders.id %>?sortBy=createdAt&sortDir=<%= nextDir %>">
+                                    Created
+                                <% if (sortBy === "createdAt") {%>
 
-                        </tbody>
-                    </table>
-                    <% if(folders.subFolders.length <= 0 && files.length <=
-                            0) { %>
-                        <p class="text-2xl text-center mt-4">Empty folder</p>
-                    <% } %>
-                </div>
+                                    <% if (sortDir === "asc") { %>
+                                        ˄
+                                    <% } else if (sortDir === "desc") { %>
+                                        ˅
+                                    <% } %>
+                                <% } %>
+                                </a>
+                            </th>
+
+                            <th
+                                scope="col"
+                                class="relative py-3.5 px-4"
+                            >
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
+                        <% if(folders.subFolders.length > 0 ||
+                                files.length > 0) { %>
+                            <% folders.subFolders.forEach((folder) => { %>
+                                <%- include("partials/item.ejs", {
+                                id: folder.id,
+                                name: folder.name,
+                                extension: null,
+                                createdAt: folder.createdAt,
+                                size: "-",
+                                type: "folder"
+                                })
+                                %>
+                            <% }) %>
+                            <% files.forEach((file) => { %>
+                                <%- include("partials/item.ejs", {
+                                id: file.id,
+                                name: file.name,
+                                extension: file.extension,
+                                createdAt: file.createdAt,
+                                size: file.size,
+                                type: "file"
+                                })
+                                %>
+                        <% }) } %>
+
+                    </tbody>
+                </table>
+                <% if(folders.subFolders.length <= 0 && files.length <=
+                        0) { %>
+                    <p class="text-2xl text-center mt-4">Empty folder</p>
+                <% } %>
             </div>
+        </div>
 
-        </section>
-    <% } %>
+    </section>
+<% } %>
 
 </div>
 
