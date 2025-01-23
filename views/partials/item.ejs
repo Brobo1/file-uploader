@@ -1,10 +1,8 @@
 <tr
-    class="
-    hover:bg-gray-100 dark:hover:bg-[#0d1421]
+    class="hover:bg-gray-100 dark:hover:bg-[#0d1421]
     <% if (type === "folder") { %>
         cursor-pointer
-    <% } %>
-    "
+    <% } %>"
     onclick="<%= type === 'folder' ? `window.location.href='/folder/${id}'` : '' %>"
     <% if (type === "folder") { %>
         data-id="load"
@@ -24,8 +22,9 @@
                         <% if(type === "folder") { %>
                             <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5zM2.5 3a.5.5 0 0 0-.5.5V6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3zM14 7H2v5.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5z"/>
                         <% } else { %>
-                            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
-                        <% } %>
+                                <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2z"/>
+
+                            <% } %>
                     </svg>
                 </div>
 
@@ -48,8 +47,28 @@
     <td class="text-sm whitespace-nowrap px-4">
         <div
             x-data="{ isOpen: false }"
-            class="relative flex items-center"
+            class="relative flex justify-end gap-5"
         >
+
+            <% if (type === "file") {%>
+                <button
+                        @click.stop="window.location.href='/folder/<%= id %>/download'"
+
+                        class="z-10 block p-1 h-8 w-8 transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 items-center"
+                >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-download m-auto"
+                            viewBox="0 0 16 16"
+                    >
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                    </svg>
+                </button>
+            <%}%>
             <!-- Menu toggle button -->
             <button
                     @click.stop="
@@ -73,6 +92,8 @@
                     />
                 </svg>
             </button>
+
+
             <div >
 
             <%- include("dropdown.ejs")%>
