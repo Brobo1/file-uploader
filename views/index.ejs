@@ -1,14 +1,35 @@
 <%- include("partials/header.ejs") %>
 
-<div id="container" class="flex justify-center items-center flex-col mt-4 gap-2">
-    <% if (user) { %>
-        <p id="user-welcome">Welcome <%= user.username %></p>
+<div id="container" class="flex justify-center items-center flex-col mt-12 gap-6 text-center">
 
-    <% } else { %>
-        <p class="text-2xl">Welcome to File uploader!</p>
-        <p><a href="/signup" class="hover:underline">Sign up</a>  or <a href="/login" class="hover:underline">login</a> to start uploading files</p>
-        <p>or test out the site with a <a href="/login/demo" class="hover:underline">Demo user</a></p>
-    <% } %>
+    <!-- Welcome Message for Visitors -->
+    <h1 class="text-4xl font-extrabold text-blue-600 drop-shadow-lg">
+        Welcome to File Uploader!
+    </h1>
+    <p class="text-xl text-gray-700">
+        Store and manage your files easily.
+    </p>
+
+    <!-- Call-to-Action Buttons -->
+    <div class="mt-6 flex flex-col gap-4 sm:flex-row">
+        <a href="/signup"
+           class="px-6 py-3 bg-green-500 text-white rounded hover:bg-green-600 transition">
+            Sign Up
+        </a>
+        <a href="/login"
+           class="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+            Log In
+        </a>
+        <a href="/login/demo"
+           class="px-6 py-3 bg-yellow-500 text-white font-bold rounded hover:bg-yellow-600 transition shadow-lg">
+            Try the Demo
+        </a>
+    </div>
+
+    <!-- Demo Focused Statement for Clarity -->
+    <p class="mt-4 text-lg text-gray-600 font-medium">
+        No need to wait—experience the app now with our demo user!
+    </p>
 
 </div>
 
