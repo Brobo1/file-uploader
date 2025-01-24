@@ -48,60 +48,52 @@
                 <!-- Added for scrollable overflow -->
                 <table class="whitespace-nowrap w-full min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-800">
-                        <tr>
+                        <tr >
                             <% let nextDir = sortDir === "asc" ?
                                     currDir = "desc" :
-                                    currDir = "asc"; %>
+                                    currDir = "asc";
+                            %>
                             <th
                                 scope="col"
-                                class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400 cursor-pointer hover:dark:bg-gray-700 hover:bg-gray-300 transition-all duration-200"
+                                onclick="location.href='/folder/<%= folders.id %>?sortBy=name&sortDir=<%= nextDir %>'"
                             >
-                                <div class="flex items-center gap-x-3">
-                                    <a href="/folder/<%= folders.id %>?sortBy=name&sortDir=<%= nextDir %>">
-                                        File name
-                                        <% if (sortBy === "name") {%>
-
-                                            <% if (sortDir === "asc") { %>
-                                                ˄
-                                            <% } else if (sortDir === "desc") { %>
-                                                ˅
-                                            <% }%>
-                                        <% } %>
-                                    </a>
-                                </div>
-                            </th>
-                            <th
-                                scope="col"
-                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                            >
-                                <a href="/folder/<%= folders.id %>?sortBy=size&sortDir=<%= nextDir %>">
-                                    File size
-                                    <% if (sortBy === "size") {%>
-
-                                        <% if (sortDir === "asc") { %>
-                                            ˄
-                                        <% } else if (sortDir === "desc") { %>
-                                            ˅
-                                        <% } %>
-                                    <% } %>
-                                </a>
-
-                            </th>
-                            <th
-                                scope="col"
-                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                            >
-                                <a href="/folder/<%= folders.id %>?sortBy=createdAt&sortDir=<%= nextDir %>">
-                                    Created
-                                <% if (sortBy === "createdAt") {%>
-
+                                File name
+                                <% if (sortBy === "name") {%>
                                     <% if (sortDir === "asc") { %>
-                                        ˄
+                                        ▲
                                     <% } else if (sortDir === "desc") { %>
-                                        ˅
-                                    <% } %>
+                                        ▼
+                                    <% }%>
                                 <% } %>
-                                </a>
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400 cursor-pointer hover:dark:bg-gray-700 hover:bg-gray-300 transition-all duration-200"
+                                onclick="location.href='/folder/<%= folders.id %>?sortBy=size&sortDir=<%= nextDir %>'"
+                            >
+                                File size
+                                <% if (sortBy === "size") {%>
+                                    <% if (sortDir === "asc") { %>
+                                        ▲
+                                    <% } else if (sortDir === "desc") { %>
+                                        ▼
+                                    <% }%>
+                                <% } %>
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400 cursor-pointer hover:dark:bg-gray-700 hover:bg-gray-300 transition-all duration-200"
+                                onclick="location.href='/folder/<%= folders.id %>?sortBy=createdAt&sortDir=<%= nextDir %>'"
+                            >
+                                Created
+                                <% if (sortBy === "createdAt") {%>
+                                    <% if (sortDir === "asc") { %>
+                                        ▲
+                                    <% } else if (sortDir === "desc") { %>
+                                        ▼
+                                    <% }%>
+                                <% } %>
                             </th>
 
                             <th
